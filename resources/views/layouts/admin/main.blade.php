@@ -24,7 +24,10 @@
     <link href="{{ url('assets/admin/assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
     <link href="{{ url('assets/admin/assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
     <link href="{{ url('assets/admin/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
-    <link href="{{ url('assets/admin/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
+    <link href="{{ url('assets/admin/assets/vendor/sweetalert/sweetalert2.min.css') }}" rel="stylesheet">
+
+    <!-- DataTables -->
+    <link href="https://cdn.datatables.net/2.0.1/css/dataTables.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="{{ url('assets/admin/assets/css/style.css') }}" rel="stylesheet">
@@ -42,21 +45,56 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
     <!-- Vendor JS Files -->
-    <script src="{{ url('assets/admin/assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
+    <script src=" {{ url('assets/admin/assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
     <script src="{{ url('assets/admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ url('assets/admin/assets/vendor/chart.js/chart.umd.js') }}"></script>
     <script src="{{ url('assets/admin/assets/vendor/echarts/echarts.min.js') }}"></script>
     <script src="{{ url('assets/admin/assets/vendor/quill/quill.min.js') }}') }}"></script>
-    <script src="{{ url('assets/admin/assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
     <script src="{{ url('assets/admin/assets/vendor/tinymce/tinymce.min.js') }}"></script>
     <script src="{{ url('assets/admin/assets/vendor/php-email-form/validate.js') }}"></script>
+    <script src="{{ url('assets/admin/assets/vendor/sweetalert/sweetalert2.min.js') }}"></script>
+
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.1/js/dataTables.bootstrap5.js"></script>
+    <script src="{{ url('assets/admin/assets/vendor/datatables/dataTables-init.js') }}"></script>
 
     <!-- Template Main JS File -->
     <script src="{{ url('assets/admin/assets/js/main.js') }}"></script>
 
     @yield('scripts')
 
+    <!-- Konfigurasi SweetAlert -->
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: '{{ session('success') }}',
+            });
+        </script>
+    @elseif (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: '{{ session('error') }}',
+            });
+        </script>
+    @endif
+
+    <!-- Konfigurasi Modal -->
+    @if (session('modal'))
+        <script>
+            $(document).ready(function() {
+                $('#{{ session('modal') }}').modal('show');
+            });
+        </script>
+    @endif
 </body>
 
 </html>
