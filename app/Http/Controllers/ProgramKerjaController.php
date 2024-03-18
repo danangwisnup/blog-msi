@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProgramKerja;
+use App\Models\RiwayatAktivitas;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -50,6 +51,22 @@ class ProgramKerjaController extends Controller
                 'deskripsi' => $request->deskripsi
             ]);
 
+            // simpan riwayat aktivitas
+            // Jika ada id maka simpan perubahan data, jika tidak ada id maka simpan data baru
+            if ($request->id) {
+                RiwayatAktivitas::create([
+                    'user_id' => auth()->id(),
+                    'modul' => 'Program Kerja',
+                    'aktivitas' => 'Mengubah program kerja pada ID "' . $request->id . '"'
+                ]);
+            } else {
+                RiwayatAktivitas::create([
+                    'user_id' => auth()->id(),
+                    'modul' => 'Program Kerja',
+                    'aktivitas' => 'Menambah program kerja "' . $request->nama_program . '"'
+                ]);
+            }
+
             return redirect()->back()->with('success', 'Program Kerja berhasil disimpan!');
         } catch (ValidationException $e) {
             return redirect()->back()->with('error', 'Program Kerja gagal disimpan!')->withErrors($e->validator->errors())->withInput();
@@ -83,25 +100,7 @@ class ProgramKerjaController extends Controller
      */
     public function update(Request $request, ProgramKerja $programKerja)
     {
-        try {
-            $request->validate([
-                'nama_program' => 'required|unique:program_kerjas,nama_program,' . $programKerja->id,
-                'deskripsi' => 'required'
-            ], [
-                'nama_program.required' => 'Nama Program harus diisi',
-                'nama_program.unique' => 'Nama Program sudah ada',
-                'deskripsi.required' => 'Deskripsi harus diisi',
-            ]);
-
-            $programKerja->update([
-                'nama_program' => $request->nama_program,
-                'deskripsi' => $request->deskripsi
-            ]);
-
-            return redirect()->route('program-kerja.index')->with('success', 'Program Kerja berhasil diperbarui!');
-        } catch (ValidationException $e) {
-            return redirect()->back()->with('error', 'Program Kerja gagal diperbarui!')->withErrors($e->validator->errors())->withInput();
-        }
+        //
     }
 
     /**

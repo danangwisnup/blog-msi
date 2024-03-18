@@ -67,27 +67,25 @@
                                             <option value="100">100</option>
                                         </select>
                                     </div>
-                                    <table class="table border table-striped table-bordered align-middle" id="zero_config">
+                                    <table class="table border table-striped table-bordered align-middle text-center"
+                                        id="zero_config">
                                         <thead>
-                                            <!-- posisi center -->
-                                            <tr class="text-center">
+                                            <tr>
                                                 <th width="20%">Waktu</th>
                                                 <th>Pengguna</th>
+                                                <th>Modul</th>
                                                 <th>Aktivitas</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>2024-10-01 14:03:20</td>
-                                                <td>Admin</td>
-                                                <td>Menambahkan pengurus baru “Setnov (Staff Program SSR)”</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2024-12-01 12:02:00</td>
-                                                <td>Admin</td>
-                                                <td>Menambahkan artikel / berita berjudul “Sosialiasasi Pentingnya Menjaga
-                                                    Kesehatan oleh Puskesmas Tembalang”</td>
-                                            </tr>
+                                            @foreach ($ct_riwayatAktivitas as $item)
+                                                <tr>
+                                                    <td>{{ $item->created_at }}</td>
+                                                    <td>{{ $item->user->name }}</td>
+                                                    <td>{{ $item->modul }}</td>
+                                                    <td>{{ $item->aktivitas }}</td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

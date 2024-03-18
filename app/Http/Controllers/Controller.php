@@ -19,6 +19,7 @@ class Controller extends BaseController
         $programKerja = \App\Models\ProgramKerja::all();
         $user = \App\Models\User::all();
         $visiMisi = \App\Models\VisiMisi::first();
+        $riwayatAktivitas = \App\Models\RiwayatAktivitas::all();
 
         view()->share('ct_beritaArtikel', $beritaArtikel);
         view()->share('ct_kontak', $kontak);
@@ -27,5 +28,6 @@ class Controller extends BaseController
         view()->share('ct_programKerja', $programKerja);
         view()->share('ct_user', $user);
         view()->share('ct_visiMisi', $visiMisi);
+        view()->share('ct_riwayatAktivitas', $riwayatAktivitas);
     }
 }

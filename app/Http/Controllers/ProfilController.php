@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profil;
+use App\Models\RiwayatAktivitas;
 use Illuminate\Http\Request;
 
 class ProfilController extends Controller
@@ -75,6 +76,13 @@ class ProfilController extends Controller
             'judul_header' => $request->judul_header,
             'judul_subheader' => $request->judul_subheader,
             'deskripsi' => $request->deskripsi
+        ]);
+
+        // simpan riwayat aktivitas
+        RiwayatAktivitas::create([
+            'user_id' => auth()->id(),
+            'modul' => 'Profil',
+            'aktivitas' => 'Mengubah profil'
         ]);
 
         // Redirect dengan pesan sukses

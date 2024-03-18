@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kontak;
+use App\Models\RiwayatAktivitas;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -52,6 +53,13 @@ class KontakController extends Controller
                 'ig' => $request->ig,
                 'wa' => $request->wa,
                 'alamat_kantor' => $request->alamat_kantor
+            ]);
+
+            // simpan riwayat aktivitas
+            RiwayatAktivitas::create([
+                'user_id' => auth()->id(),
+                'modul' => 'Kontak',
+                'aktivitas' => 'Mengubah kontak'
             ]);
 
             return redirect()->back()->with('success', 'Kontak berhasil diupdate!');

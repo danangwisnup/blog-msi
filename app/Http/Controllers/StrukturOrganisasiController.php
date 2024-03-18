@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RiwayatAktivitas;
 use App\Models\StrukturOrganisasi;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -77,6 +78,22 @@ class StrukturOrganisasiController extends Controller
         }
 
         StrukturOrganisasi::updateOrCreate(['id' => $request->id], $data);
+
+        // simpan riwayat aktivitas
+        // Jika ada id maka simpan perubahan data, jika tidak ada id maka simpan data baru
+        if ($request->id) {
+            RiwayatAktivitas::create([
+                'user_id' => auth()->id(),
+                'modul' => 'Struktur Organisasi',
+                'aktivitas' => 'Mengubah struktur organisasi pada ID "' . $request->id . '"'
+            ]);
+        } else {
+            RiwayatAktivitas::create([
+                'user_id' => auth()->id(),
+                'modul' => 'Struktur Organisasi',
+                'aktivitas' => 'Menambah struktur organisasi "' . $request->nama . '"'
+            ]);
+        }
 
         return redirect()->back()->with('success', 'Data berhasil ditambahkan.');
     }

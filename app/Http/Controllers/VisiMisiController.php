@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RiwayatAktivitas;
 use App\Models\VisiMisi;
 use Illuminate\Http\Request;
 
@@ -92,6 +93,13 @@ class VisiMisiController extends Controller
             'visi_gambar' => $nama_gambar_visi,
             'misi_deskripsi' => $request->misi_deskripsi,
             'misi_gambar' => $nama_gambar_misi,
+        ]);
+
+        // simpan riwayat aktivitas
+        RiwayatAktivitas::create([
+            'user_id' => auth()->id(),
+            'modul' => 'Visi Misi',
+            'aktivitas' => 'Mengubah visi misi'
         ]);
 
         // Redirect dengan pesan sukses

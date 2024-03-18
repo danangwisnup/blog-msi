@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BeritaArtikel;
+use App\Models\RiwayatAktivitas;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -50,11 +51,29 @@ class BeritaArtikelController extends Controller
                 return $item->value;
             }, $tagar));
 
-            BeritaArtikel::create([
+            BeritaArtikel::updateOrCreate([
+                'id' => $request->id
+            ], [
                 'tagar' => $tagar,
                 'judul' => $request->judul,
-                'isi' => $request->isi
+                'isi' => $request->isi,
             ]);
+
+            // simpan riwayat aktivitas
+            // Jika ada id maka simpan perubahan data, jika tidak ada id maka simpan data baru
+            if ($request->id) {
+                RiwayatAktivitas::create([
+                    'user_id' => auth()->id(),
+                    'modul' => 'Berita / Artikel',
+                    'aktivitas' => 'Mengubah data berita / artikel dengan judul "' . $request->judul . '"'
+                ]);
+            } else {
+                RiwayatAktivitas::create([
+                    'user_id' => auth()->id(),
+                    'modul' => 'Berita / Artikel',
+                    'aktivitas' => 'Menambah data berita / artikel dengan judul "' . $request->judul . '"'
+                ]);
+            }
 
             return redirect()->back()->with('success', 'Berita / Artikel berhasil disimpan!');
         } catch (ValidationException $e) {
