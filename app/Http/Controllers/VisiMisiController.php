@@ -35,18 +35,18 @@ class VisiMisiController extends Controller
         try {
             $request->validate([
                 'visi_deskripsi' => 'required',
-                'visi_gambar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'visi_gambar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5048',
                 'misi_deskripsi' => 'required',
-                'misi_gambar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'misi_gambar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5048',
             ], [
                 'visi_deskripsi.required' => 'Deskripsi visi wajib diisi',
                 'visi_gambar.image' => 'Gambar visi harus berupa gambar',
                 'visi_gambar.mimes' => 'Gambar visi harus berformat jpeg, png, jpg, gif, atau svg',
-                'visi_gambar.max' => 'Ukuran gambar visi maksimal 2MB',
+                'visi_gambar.max' => 'Ukuran gambar visi maksimal 5MB',
                 'misi_deskripsi.required' => 'Deskripsi misi wajib diisi',
                 'misi_gambar.image' => 'Gambar misi harus berupa gambar',
                 'misi_gambar.mimes' => 'Gambar misi harus berformat jpeg, png, jpg, gif, atau svg',
-                'misi_gambar.max' => 'Ukuran gambar misi maksimal 2MB',
+                'misi_gambar.max' => 'Ukuran gambar misi maksimal 5MB',
             ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
             return redirect()->back()->with('error', 'Visi Misi gagal disimpan!')->withErrors($e->validator->errors())->withInput();

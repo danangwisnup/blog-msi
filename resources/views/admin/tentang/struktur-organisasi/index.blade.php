@@ -6,24 +6,25 @@
     <main id="main" class="main">
 
         <div class="pagetitle mt-4 mb-4">
-            <h1>Berita / Artikel</h1>
+            <h1>Struktur Organisasi</h1>
         </div>
 
         <section class="section">
             <div class="row">
                 <div class="col-12">
                     <div class="text-end">
+                        <!-- open sweetalert -->
                         <a href="javascript:void(0)" class="btn btn-danger" onclick="confirmDeleteAll()">
                             <i class="bi bi-trash3"></i> Hapus Semua
                         </a>
-                        <a href="<?= url('admin/berita-artikel/create') ?>" class="btn btn-success">
+                        <a href="<?= url('admin/tentang/struktur-organisasi/create') ?>" class="btn btn-success">
                             <i class="bi bi-plus-square-dotted"></i> Tambah baru
                         </a>
                     </div>
                     <br />
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Daftar Berita / Artikel</h5>
+                            <h5 class="card-title">Daftar Staff Pengurus</h5>
                             <div class="mb-3">
                                 <input type="text" class="form-control" id="search-table" placeholder="Cari data...">
                             </div>
@@ -41,25 +42,30 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Tagar</th>
-                                        <th>Judul</th>
+                                        <th>Foto</th>
+                                        <th>Nama</th>
+                                        <th>Jabatan</th>
                                         <th width="15%">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($ct_beritaArtikel as $item)
+                                    @foreach ($ct_strukturOrganisasi as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->tagar }}</td>
-                                            <td>{{ $item->judul }}</td>
+                                            <td>
+                                                <img src="{{ asset('img/struktur-organisasi/' . $item->foto) }}"
+                                                    alt="{{ $item->nama }}" class="img-thumbnail" width="100">
+                                            </td>
+                                            <td>{{ $item->nama }}</td>
+                                            <td>{{ $item->jabatan }}</td>
                                             <td class="text-center">
-                                                <a href="{{ route('berita-artikel.show', $item->id) }}"
+                                                <a href="{{ route('struktur-organisasi.show', $item->id) }}"
                                                     class="btn btn-primary">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
                                                 <a href="javascript:void(0)" class="btn btn-danger"
                                                     onclick="confirmDelete({{ $item->id }})">
-                                                    <i class="bi bi-trash3"></i>
+                                                    <i class="bi bi-trash"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -91,12 +97,13 @@
                 confirmButtonColor: '#d33'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    fetch('<?= url('admin/berita-artikel') ?>/' + id, {
+                    fetch('<?= url('admin/tentang/struktur-organisasi') ?>/' + id, {
                         method: 'DELETE',
                         headers: {
                             'X-CSRF-TOKEN': '<?= csrf_token() ?>'
                         }
                     }).then(response => response.json()).then(data => {
+                        console.log(data);
                         if (data.status == 'success') {
                             Swal.fire({
                                 icon: 'success',
@@ -138,12 +145,13 @@
                 confirmButtonColor: '#d33'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    fetch('<?= url('admin/berita-artikel/destroy-all') ?>', {
+                    fetch('<?= url('admin/tentang/struktur-organisasi/destroy-all') ?>', {
                         method: 'DELETE',
                         headers: {
                             'X-CSRF-TOKEN': '<?= csrf_token() ?>'
                         }
                     }).then(response => response.json()).then(data => {
+                        console.log(data);
                         if (data.status == 'success') {
                             Swal.fire({
                                 icon: 'success',

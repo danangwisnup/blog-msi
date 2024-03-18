@@ -27,8 +27,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<?= url('admin/tentang/pengurus') ?>" class="<?= $title == 'Pengurus' ? 'active' : '' ?>">
-                        <i class="bi bi-circle fw-bold"></i><span>Pengurus</span>
+                    <a href="<?= url('admin/tentang/struktur-organisasi') ?>"
+                        class="<?= $title == 'Struktur Organisasi' ? 'active' : '' ?>">
+                        <i class="bi bi-circle fw-bold"></i><span>Struktur Organisasi</span>
                     </a>
                 </li>
             </ul>

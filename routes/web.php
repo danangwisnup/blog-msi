@@ -5,13 +5,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\BerandaController;
-use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\VisiMisiController;
 use App\Http\Controllers\ProgramKerjaController;
-use App\Http\Controllers\ArtikelBeritaController;
 use App\Http\Controllers\BeritaArtikelController;
-use App\Http\Controllers\CobaController;
 use App\Http\Controllers\PengaturanAkunController;
+use App\Http\Controllers\StrukturOrganisasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,8 +70,9 @@ Route::group(['prefix' => 'admin'], function () {
             // Route visi-misi
             Route::resource('visi-misi', VisiMisiController::class);
 
-            // Route pengurus
-            Route::resource('pengurus', PengurusController::class);
+            // Pegawai
+            Route::delete('struktur-organisasi/destroy-all', [StrukturOrganisasiController::class, 'destroyAll'])->name('struktur-organisasi.destroy-all');
+            Route::resource('struktur-organisasi', StrukturOrganisasiController::class);
         });
 
         // Route program kerja

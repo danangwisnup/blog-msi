@@ -14,7 +14,7 @@ class Controller extends BaseController
     {
         $beritaArtikel = \App\Models\BeritaArtikel::all();
         $kontak = \App\Models\Kontak::first();
-        $pengurus = \App\Models\Pengurus::all();
+        $strukturOrganisasi = \App\Models\StrukturOrganisasi::all();
         $profil = \App\Models\Profil::first();
         $programKerja = \App\Models\ProgramKerja::all();
         $user = \App\Models\User::all();
@@ -22,7 +22,7 @@ class Controller extends BaseController
 
         view()->share('ct_beritaArtikel', $beritaArtikel);
         view()->share('ct_kontak', $kontak);
-        view()->share('ct_pengurus', $pengurus);
+        view()->share('ct_strukturOrganisasi', $strukturOrganisasi);
         view()->share('ct_profil', $profil);
         view()->share('ct_programKerja', $programKerja);
         view()->share('ct_user', $user);

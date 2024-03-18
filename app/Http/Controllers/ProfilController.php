@@ -33,7 +33,7 @@ class ProfilController extends Controller
         // Validasi data
         try {
             $request->validate([
-                'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5048',
                 'nama_blog' => 'required',
                 'judul_header' => 'required',
                 'judul_subheader' => 'required',
@@ -41,7 +41,7 @@ class ProfilController extends Controller
             ], [
                 'logo.image' => 'Logo harus berupa gambar',
                 'logo.mimes' => 'Logo harus berformat jpeg, png, jpg, gif, atau svg',
-                'logo.max' => 'Ukuran logo maksimal 2MB',
+                'logo.max' => 'Ukuran logo maksimal 5MB',
                 'nama_blog.required' => 'Nama blog wajib diisi',
                 'judul_header.required' => 'Judul header wajib diisi',
                 'judul_subheader.required' => 'Judul subheader wajib diisi',
@@ -60,7 +60,9 @@ class ProfilController extends Controller
             // hapus logo lama
             if (Profil::first()->logo != 'null') {
                 $file_path = public_path('img') . '/' . Profil::first()->logo;
-                unlink($file_path);
+                if (file_exists($file_path)) {
+                    unlink($file_path);
+                }
             }
         } else {
             $nama_logo = Profil::first()->logo;

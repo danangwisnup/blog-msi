@@ -37,10 +37,10 @@
                                     <option value="100">100</option>
                                 </select>
                             </div>
-                            <table class="table border table-striped table-bordered align-middle" id="zero_config">
+                            <table class="table border table-striped table-bordered align-middle text-center" id="zero_config">
                                 <thead>
                                     <!-- posisi center -->
-                                    <tr class="text-center">
+                                    <tr>
                                         <th>No</th>
                                         <th>Nama Program Kerja</th>
                                         <th width="15%">Aksi</th>

@@ -20,14 +20,14 @@
                         <div class="col-md-6">
                             <div class="card p-3">
                                 <div class="card-body">
-                                    <h5 class="card-title">Total Pengurus</h5>
+                                    <h5 class="card-title">Total Staff Pengurus</h5>
                                     <div class="d-flex align-items-center">
                                         <div
                                             class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                             <i class="bi bi-people fs-1 text-primary"></i>
                                         </div>
                                         <div class="ms-auto">
-                                            <h3>{{ count($ct_pengurus) }}</h3>
+                                            <h3>{{ count($ct_strukturOrganisasi) }}
                                         </div>
                                     </div>
                                 </div>
