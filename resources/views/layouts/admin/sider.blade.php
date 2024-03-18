@@ -41,10 +41,10 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link <?= request()->is('admin/artikel-berita*') ? '' : 'collapsed' ?>"
-                href="<?= url('admin/artikel-berita') ?>">
+            <a class="nav-link <?= request()->is('admin/berita-artikel*') ? '' : 'collapsed' ?>"
+                href="<?= url('admin/berita-artikel') ?>">
                 <i class="bi bi-newspaper fs-5 fw-bold"></i>
-                <span>Artikel / Berita</span>
+                <span>Berita / Artikel</span>
             </a>
         </li>
         <li class="nav-item">

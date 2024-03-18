@@ -26,6 +26,8 @@
     <link href="{{ url('assets/admin/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
     <link href="{{ url('assets/admin/assets/vendor/sweetalert/sweetalert2.min.css') }}" rel="stylesheet">
 
+    <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+
     <!-- DataTables -->
     <link href="https://cdn.datatables.net/2.0.1/css/dataTables.css" rel="stylesheet">
 
@@ -65,6 +67,13 @@
 
     <!-- Template Main JS File -->
     <script src="{{ url('assets/admin/assets/js/main.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+    <script>
+        new Tagify(document.querySelector('#tagar'), {
+
+        });
+    </script>
 
     @yield('scripts')
 

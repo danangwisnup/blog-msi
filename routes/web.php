@@ -9,6 +9,8 @@ use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\VisiMisiController;
 use App\Http\Controllers\ProgramKerjaController;
 use App\Http\Controllers\ArtikelBeritaController;
+use App\Http\Controllers\BeritaArtikelController;
+use App\Http\Controllers\CobaController;
 use App\Http\Controllers\PengaturanAkunController;
 
 /*
@@ -75,12 +77,12 @@ Route::group(['prefix' => 'admin'], function () {
         });
 
         // Route program kerja
-        Route::delete('program-kerja/destroy-all', [ProgramKerjaController::class, 'destroyAll']);
+        Route::delete('program-kerja/destroy-all', [ProgramKerjaController::class, 'destroyAll'])->name('program-kerja.destroy-all');
         Route::resource('program-kerja', ProgramKerjaController::class);
 
-
-        // Route artikel/berita
-        Route::resource('artikel-berita', ArtikelBeritaController::class);
+        // Route berita artikel
+        Route::delete('berita-artikel/destroy-all', [BeritaArtikelController::class, 'destroyAll'])->name('berita-artikel.destroy-all');
+        Route::resource('berita-artikel', BeritaArtikelController::class);
 
         // Route kontak
         Route::resource('kontak', KontakController::class);

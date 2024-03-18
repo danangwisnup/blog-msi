@@ -27,7 +27,7 @@
                                             <i class="bi bi-people fs-1 text-primary"></i>
                                         </div>
                                         <div class="ms-auto">
-                                            <h3>145</h3>
+                                            <h3>{{ count($ct_pengurus) }}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -42,7 +42,7 @@
                                     <div class="d-flex align-items-center">
                                         <i class="bi bi-newspaper fs-1 text-danger"></i>
                                         <div class="ms-auto">
-                                            <h3>145</h3>
+                                            <h3>{{ count($ct_beritaArtikel) }}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -67,12 +67,11 @@
                                             <option value="100">100</option>
                                         </select>
                                     </div>
-                                    <table class="table border table-striped table-bordered align-middle"
-                                        id="zero_config">
+                                    <table class="table border table-striped table-bordered align-middle" id="zero_config">
                                         <thead>
                                             <!-- posisi center -->
                                             <tr class="text-center">
-                                                <th>Waktu</th>
+                                                <th width="20%">Waktu</th>
                                                 <th>Pengguna</th>
                                                 <th>Aktivitas</th>
                                             </tr>

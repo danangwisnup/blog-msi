@@ -2,7 +2,8 @@
 
     <div class="text-center" style="width: 280px; height: 50px; overflow: hidden;">
         <a href="/" class="d-flex align-items-center justify-content-center">
-            <img src="<?= url('img/msi.png') ?>" alt="Logo" class="img-fluid" style="width: 180px; height: 50px;">
+            <img src="{{ url('img') }}/{{ $ct_profil->logo }}" alt="Logo" class="img-fluid"
+                style="width: 180px; height: 50px;">
         </a>
     </div>
 

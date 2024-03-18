@@ -43,4 +43,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // one to one ke pengurus
+    public function pengurus()
+    {
+        return $this->hasOne(Pengurus::class);
+    }
 }

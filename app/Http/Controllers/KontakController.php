@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kontak;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class KontakController extends Controller
 {
@@ -30,7 +31,33 @@ class KontakController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validasi data
+        try {
+            $request->validate([
+                'email' => 'required|email',
+                'ig' => 'required',
+                'wa' => 'required',
+                'alamat_kantor' => 'required'
+            ], [
+                'email.required' => 'Email harus diisi',
+                'email.email' => 'Email tidak valid',
+                'ig.required' => 'Instagram harus diisi',
+                'wa.required' => 'Whatsapp harus diisi',
+                'alamat_kantor.required' => 'Alamat kantor harus diisi'
+            ]);
+
+            // update data first
+            Kontak::first()->update([
+                'email' => $request->email,
+                'ig' => $request->ig,
+                'wa' => $request->wa,
+                'alamat_kantor' => $request->alamat_kantor
+            ]);
+
+            return redirect()->back()->with('success', 'Kontak berhasil diupdate!');
+        } catch (ValidationException $e) {
+            return redirect()->back()->with('error', 'Kontak gagal diupdate!')->withErrors($e->validator->errors())->withInput();
+        }
     }
 
     /**

@@ -7,7 +7,7 @@
 
         <div class="pagetitle mt-4 mb-4">
             <div class="text-start">
-                <a href="<?= url('admin/program-kerja') ?>" class="btn btn-dark">
+                <a href="<?= url('admin/berita-artikel') ?>" class="btn btn-dark">
                     <i class="bi bi-box-arrow-left"></i> Kembali
                 </a>
             </div>
@@ -29,18 +29,24 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Buat Program Kerja</h5>
-                            <form class="row g-3" method="post" action="{{ route('program-kerja.store') }}">
+                            <h5 class="card-title">Buat Berita / Artikel</h5>
+                            <form class="row g-3" method="post" action="{{ route('berita-artikel.store') }}">
                                 @csrf
+                                <input type="hidden" name="id" value="@if (isset($beritaArtikel)){{ $beritaArtikel->id }}@endif">
                                 <div class="col-12">
-                                    <label for="nama_program" class="form-label fw-semibold mt-2">Nama Program Kerja</label>
-                                    <input type="text" class="form-control" id="nama_program" name="nama_program" value="@if (isset($programKerja)){{ $programKerja->nama_program }}@else{{ old('nama_program') }}@endif"
-                                        placeholder="Masukkan Nama Program Kerja">
+                                    <label for="tag" class="form-label fw-semibold mt-2">Tagar</label>
+                                    <input type="tagar" class="form-control" id="tagar" name="tagar"
+                                        value="{{ $beritaArtikel->tagar ?? old('tagar') }}" placeholder="Masukkan Tagar">
                                 </div>
                                 <div class="col-12">
-                                    <label for="deskripsi" class="form-label fw-semibold mt-2">Deskripsi</label>
-                                    <textarea class="form-control tinymce-editor" id="deskripsi" name="deskripsi" rows="5"
-                                        placeholder="Masukkan Deskripsi">@if (isset($programKerja)){{ $programKerja->deskripsi }}@else{{ old('deskripsi') }}@endif</textarea>
+                                    <label for="judul" class="form-label fw-semibold mt-2">Judul</label>
+                                    <input type="text" class="form-control" id="judul" name="judul"
+                                        value="{{ $beritaArtikel->judul ?? old('judul') }}" placeholder="Masukkan Judul">
+                                </div>
+                                <div class="col-12">
+                                    <label for="isi" class="form-label fw-semibold mt-2">Isi</label>
+                                    <textarea class="form-control tinymce-editor" id="isi" name="isi" rows="5"
+                                        placeholder="Masukkan Deskripsi">{{ $beritaArtikel->isi ?? old('isi') }}</textarea>
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary">Submit</button>

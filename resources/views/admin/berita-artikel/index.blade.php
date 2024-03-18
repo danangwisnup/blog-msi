@@ -6,25 +6,24 @@
     <main id="main" class="main">
 
         <div class="pagetitle mt-4 mb-4">
-            <h1>Program Kerja</h1>
+            <h1>Berita / Artikel</h1>
         </div>
 
         <section class="section">
             <div class="row">
                 <div class="col-12">
                     <div class="text-end">
-                        <!-- open sweetalert -->
                         <a href="javascript:void(0)" class="btn btn-danger" onclick="confirmDeleteAll()">
                             <i class="bi bi-trash3"></i> Hapus Semua
                         </a>
-                        <a href="<?= url('admin/program-kerja/create') ?>" class="btn btn-success">
+                        <a href="<?= url('admin/berita-artikel/create') ?>" class="btn btn-success">
                             <i class="bi bi-plus-square-dotted"></i> Tambah baru
                         </a>
                     </div>
                     <br />
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Daftar Program Kerja</h5>
+                            <h5 class="card-title">Daftar Berita / Artikel</h5>
                             <div class="mb-3">
                                 <input type="text" class="form-control" id="search-table" placeholder="Cari data...">
                             </div>
@@ -42,23 +41,25 @@
                                     <!-- posisi center -->
                                     <tr class="text-center">
                                         <th>No</th>
-                                        <th>Nama Program Kerja</th>
+                                        <th>Tagar</th>
+                                        <th>Judul</th>
                                         <th width="15%">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($ct_programKerja as $item)
+                                    @foreach ($ct_beritaArtikel as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->nama_program }}</td>
+                                            <td>{{ $item->tagar }}</td>
+                                            <td>{{ $item->judul }}</td>
                                             <td class="text-center">
-                                                <a href="{{ route('program-kerja.show', $item->id) }}"
+                                                <a href="{{ route('berita-artikel.show', $item->id) }}"
                                                     class="btn btn-primary">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
                                                 <a href="javascript:void(0)" class="btn btn-danger"
                                                     onclick="confirmDelete({{ $item->id }})">
-                                                    <i class="bi bi-trash"></i>
+                                                    <i class="bi bi-trash3"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -90,13 +91,12 @@
                 confirmButtonColor: '#d33'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    fetch('<?= url('admin/program-kerja') ?>/' + id, {
+                    fetch('<?= url('admin/berita-artikel') ?>/' + id, {
                         method: 'DELETE',
                         headers: {
                             'X-CSRF-TOKEN': '<?= csrf_token() ?>'
                         }
                     }).then(response => response.json()).then(data => {
-                        console.log(data);
                         if (data.status == 'success') {
                             Swal.fire({
                                 icon: 'success',
@@ -138,13 +138,12 @@
                 confirmButtonColor: '#d33'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    fetch('<?= url('admin/program-kerja/destroy-all') ?>', {
+                    fetch('<?= url('admin/berita-artikel/destroy-all') ?>', {
                         method: 'DELETE',
                         headers: {
                             'X-CSRF-TOKEN': '<?= csrf_token() ?>'
                         }
                     }).then(response => response.json()).then(data => {
-                        console.log(data);
                         if (data.status == 'success') {
                             Swal.fire({
                                 icon: 'success',
