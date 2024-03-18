@@ -103,3 +103,13 @@
 
     </main><!-- End Main -->
 @endsection
+
+@section('scripts')
+    <script>
+        $('#zero_config').DataTable({
+            "order": [
+                [0, "desc"]
+            ]
+        });
+    </script>
+@endsection
