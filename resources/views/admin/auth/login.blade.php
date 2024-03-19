@@ -27,13 +27,15 @@
                                     novalidate>
                                     @csrf
                                     <div class="col-12 mb-3">
-                                        <label for="email" class="form-label">Email</label>
+                                        <label for="email" class="form-label">Email<small
+                                                class="text-danger">*</small></label>
                                         <input type="email" class="form-control" name="email" id="email" required>
                                         <div class="invalid-feedback">Silahkan masukkan email anda!</div>
                                     </div>
 
                                     <div class="col-12 mb-3">
-                                        <label for="password" class="form-label">Kata Sandi</label>
+                                        <label for="password" class="form-label">Kata Sandi<small
+                                                class="text-danger">*</small></label>
                                         <input type="password" class="form-control" name="password" id="password" required>
                                         <div class="invalid-feedback">Silahkan masukkan kata sandi anda!</div>
                                     </div>

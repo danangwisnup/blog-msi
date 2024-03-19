@@ -32,19 +32,23 @@
                             <h5 class="card-title">Buat Berita / Artikel</h5>
                             <form class="row g-3" method="post" action="{{ route('berita-artikel.store') }}">
                                 @csrf
-                                <input type="hidden" name="id" value="@if (isset($beritaArtikel)){{ $beritaArtikel->id }}@endif">
+                                <input type="hidden" name="id"
+                                    value="@if (isset($beritaArtikel)) {{ $beritaArtikel->id }} @endif">
                                 <div class="col-12">
-                                    <label for="tag" class="form-label fw-semibold mt-2">Tagar</label>
+                                    <label for="tag" class="form-label fw-semibold mt-2">Tagar<small
+                                            class="text-danger">*</small></label>
                                     <input type="tagar" class="form-control" id="tagar" name="tagar"
                                         value="{{ $beritaArtikel->tagar ?? old('tagar') }}" placeholder="Masukkan Tagar">
                                 </div>
                                 <div class="col-12">
-                                    <label for="judul" class="form-label fw-semibold mt-2">Judul</label>
+                                    <label for="judul" class="form-label fw-semibold mt-2">Judul<small
+                                            class="text-danger">*</small></label>
                                     <input type="text" class="form-control" id="judul" name="judul"
                                         value="{{ $beritaArtikel->judul ?? old('judul') }}" placeholder="Masukkan Judul">
                                 </div>
                                 <div class="col-12">
-                                    <label for="isi" class="form-label fw-semibold mt-2">Isi</label>
+                                    <label for="isi" class="form-label fw-semibold mt-2">Isi<small
+                                            class="text-danger">*</small></label>
                                     <textarea class="form-control tinymce-editor" id="isi" name="isi" rows="5"
                                         placeholder="Masukkan Deskripsi">{{ $beritaArtikel->isi ?? old('isi') }}</textarea>
                                 </div>

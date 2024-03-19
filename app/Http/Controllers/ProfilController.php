@@ -69,20 +69,30 @@ class ProfilController extends Controller
             $nama_logo = Profil::first()->logo;
         }
 
-        // simpan data
-        Profil::first()->update([
+        // data
+        $data = [
             'logo' => $nama_logo,
             'nama_blog' => $request->nama_blog,
             'judul_header' => $request->judul_header,
             'judul_subheader' => $request->judul_subheader,
             'deskripsi' => $request->deskripsi
-        ]);
+        ];
+
+        // data sebelumnya
+        $sebelumnya = Profil::first()->select('logo', 'nama_blog', 'judul_header', 'judul_subheader', 'deskripsi')->first();
+
+        // simpan data
+        Profil::first()->update($data);
 
         // simpan riwayat aktivitas
         RiwayatAktivitas::create([
             'user_id' => auth()->id(),
-            'modul' => 'Profil',
-            'aktivitas' => 'Mengubah profil'
+            'modul' => 'Tentang/Profil',
+            'aktivitas' => 'Mengubah tentang/profil',
+            'data' => json_encode([
+                'sebelum' => $sebelumnya,
+                'sesudah' => $data
+            ])
         ]);
 
         // Redirect dengan pesan sukses

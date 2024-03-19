@@ -29,25 +29,29 @@
                             <form class="row g-3" method="post" action="{{ route('kontak.store') }}">
                                 @csrf
                                 <div class="col-12">
-                                    <label for="email" class="form-label fw-semibold mt-2">E-mail</label>
+                                    <label for="email" class="form-label fw-semibold mt-2">E-mail<small
+                                            class="text-danger">*</small></label>
                                     <input type="email" class="form-control" id="email" name="email"
                                         value="@if (isset($ct_kontak)) {{ $ct_kontak->email }}@else{{ old('email') }} @endif"
                                         placeholder="Masukkan E-mail">
                                 </div>
                                 <div class="col-12">
-                                    <label for="ig" class="form-label fw-semibold mt-2">Instagram</label>
+                                    <label for="ig" class="form-label fw-semibold mt-2">Instagram<small
+                                            class="text-danger">*</small></label>
                                     <input type="text" class="form-control" id="ig" name="ig"
                                         value="@if (isset($ct_kontak)) {{ $ct_kontak->ig }}@else{{ old('ig') }} @endif"
                                         placeholder="Masukkan Instagram">
                                 </div>
                                 <div class="col-12">
-                                    <label for="wa" class="form-label fw-semibold mt-2">Whatsapp</label>
+                                    <label for="wa" class="form-label fw-semibold mt-2">Whatsapp<small
+                                            class="text-danger">*</small></label>
                                     <input type="text" class="form-control" id="wa" name="wa"
                                         value="@if (isset($ct_kontak)) {{ $ct_kontak->wa }}@else{{ old('wa') }} @endif"
                                         placeholder="Masukkan Whatsapp">
                                 </div>
                                 <div class="col-12">
-                                    <label for="alamat_kantor" class="form-label fw-semibold mt-2">Alamat Kantor</label>
+                                    <label for="alamat_kantor" class="form-label fw-semibold mt-2">Alamat Kantor<small
+                                            class="text-danger">*</small></label>
                                     <input type="text" class="form-control" id="alamat_kantor" name="alamat_kantor"
                                         value="@if (isset($ct_kontak)) {{ $ct_kontak->alamat_kantor }}@else{{ old('alamat_kantor') }} @endif"
                                         placeholder="Masukkan Alamat Kantor">

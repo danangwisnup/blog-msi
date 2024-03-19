@@ -84,12 +84,15 @@ class PengaturanAkunController extends Controller
                 'password_old_match' => 'Password lama tidak sesuai'
             ]);
 
-            // data yang akan diupdate
+            // data
             $data = [
                 'name' => $request->nama,
                 'email' => $request->email,
                 'password' => bcrypt($request->password)
             ];
+
+            // data sebelumnya
+            $sebelumnya = User::find($id)->select('name', 'email')->first();
 
             // jika password kosong
             if ($request->password == null) {
@@ -103,7 +106,11 @@ class PengaturanAkunController extends Controller
             RiwayatAktivitas::create([
                 'user_id' => auth()->id(),
                 'modul' => 'Pengaturan Akun',
-                'aktivitas' => 'Mengubah Data Akun'
+                'aktivitas' => 'Mengubah Data Akun',
+                'data' => json_encode([
+                    'sebelum' => $sebelumnya,
+                    'sesudah' => $data
+                ])
             ]);
 
             return redirect()->back()->with('success', 'Akun berhasil diupdate!');

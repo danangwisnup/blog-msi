@@ -47,19 +47,29 @@ class KontakController extends Controller
                 'alamat_kantor.required' => 'Alamat kantor harus diisi'
             ]);
 
-            // update data first
-            Kontak::first()->update([
+            // data
+            $data = [
                 'email' => $request->email,
                 'ig' => $request->ig,
                 'wa' => $request->wa,
                 'alamat_kantor' => $request->alamat_kantor
-            ]);
+            ];
+
+            // sebelumnya
+            $sebelumnya = Kontak::first()->select('email', 'ig', 'wa', 'alamat_kantor')->first();
+
+            // update data first
+            Kontak::first()->update($data);
 
             // simpan riwayat aktivitas
             RiwayatAktivitas::create([
                 'user_id' => auth()->id(),
                 'modul' => 'Kontak',
-                'aktivitas' => 'Mengubah kontak'
+                'aktivitas' => 'Mengubah kontak',
+                'data' => json_encode([
+                    'sebelum' => $sebelumnya,
+                    'sesudah' => $data
+                ])
             ]);
 
             return redirect()->back()->with('success', 'Kontak berhasil diupdate!');

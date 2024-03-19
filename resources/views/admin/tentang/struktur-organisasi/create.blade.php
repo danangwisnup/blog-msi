@@ -36,7 +36,8 @@
                                 <input type="hidden" name="id"
                                     value="{{ isset($strukturOrganisasi) ? $strukturOrganisasi->id : '' }}">
                                 <div class="col-12">
-                                    <label for="foto" class="form-label fw-semibold mt-2">Foto</label>
+                                    <label for="foto" class="form-label fw-semibold mt-2">Foto<small
+                                            class="text-danger">*</small></label>
                                     <div id="foto_preview" class="mb-3 text-center">
                                         <div class="mb-3 text-center">
                                             <img src="{{ url('img/struktur-organisasi/') }}/{{ isset($strukturOrganisasi) ? $strukturOrganisasi->foto : 'no-image.png' }}"
@@ -49,13 +50,15 @@
                                     <small class="text-danger">* Ukuran foto 3x4</small>
                                 </div>
                                 <div class="col-12">
-                                    <label for="nama" class="form-label fw-semibold mt-2">Nama</label>
+                                    <label for="nama" class="form-label fw-semibold mt-2">Nama<small
+                                            class="text-danger">*</small></label>
                                     <input type="text" class="form-control" id="nama" name="nama"
                                         value="{{ isset($strukturOrganisasi) ? $strukturOrganisasi->nama : old('nama') }}"
                                         placeholder="Masukkan Nama">
                                 </div>
                                 <div class="col-12">
-                                    <label for="jabatan" class="form-label fw-semibold mt-2">Jabatan</label>
+                                    <label for="jabatan" class="form-label fw-semibold mt-2">Jabatan<small
+                                            class="text-danger">*</small></label>
                                     <select class="form-select" id="jabatan" name="jabatan">
                                         <option value="">Pilih Jabatan</option>
                                         <option value="Ketua"

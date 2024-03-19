@@ -30,7 +30,8 @@
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-12">
-                                    <label for="visi_gambar" class="form-label fw-semibold mt-2">Visi</label>
+                                    <label for="visi_gambar" class="form-label fw-semibold mt-2">Visi<small
+                                            class="text-danger">*</small></label>
                                     <div id="visi_preview" class="mb-3 text-center">
                                         <img src="{{ url('img') }}/{{ $ct_visiMisi->visi_gambar }}" alt="visi_gambar"
                                             class="img-fluid img-thumbnail" style="width: 200px;">
@@ -43,7 +44,8 @@
                                         placeholder="Masukkan Deskripsi">{{ $ct_visiMisi->visi_deskripsi }}</textarea>
                                 </div>
                                 <div class="col-12">
-                                    <label for="misi_gambar" class="form-label fw-semibold mt-2">Misi</label>
+                                    <label for="misi_gambar" class="form-label fw-semibold mt-2">Misi<small
+                                            class="text-danger">*</small></label>
                                     <div id="misi_preview" class="mb-3 text-center">
                                         <img src="{{ url('img') }}/{{ $ct_visiMisi->misi_gambar }}" alt="misi_gambar"
                                             class="img-fluid img-thumbnail" style="width: 200px;">

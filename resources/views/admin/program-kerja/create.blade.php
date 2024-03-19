@@ -33,12 +33,14 @@
                             <form class="row g-3" method="post" action="{{ route('program-kerja.store') }}">
                                 @csrf
                                 <div class="col-12">
-                                    <label for="nama_program" class="form-label fw-semibold mt-2">Nama Program Kerja</label>
+                                    <label for="nama_program" class="form-label fw-semibold mt-2">Nama Program Kerja<small
+                                            class="text-danger">*</small></label>
                                     <input type="text" class="form-control" id="nama_program" name="nama_program" value="@if (isset($programKerja)){{ $programKerja->nama_program }}@else{{ old('nama_program') }}@endif"
                                         placeholder="Masukkan Nama Program Kerja">
                                 </div>
                                 <div class="col-12">
-                                    <label for="deskripsi" class="form-label fw-semibold mt-2">Deskripsi</label>
+                                    <label for="deskripsi" class="form-label fw-semibold mt-2">Deskripsi<small
+                                            class="text-danger">*</small></label>
                                     <textarea class="form-control tinymce-editor" id="deskripsi" name="deskripsi" rows="5"
                                         placeholder="Masukkan Deskripsi">@if (isset($programKerja)){{ $programKerja->deskripsi }}@else{{ old('deskripsi') }}@endif</textarea>
                                 </div>

@@ -44,12 +44,21 @@ class ProgramKerjaController extends Controller
                 'deskripsi.required' => 'Deskripsi harus diisi',
             ]);
 
-            ProgramKerja::updateOrCreate([
-                'id' => $request->id
-            ], [
+            // jika id kosong maka data sebelumnya kosong
+            if ($request->id) {
+                $sebelumnya = ProgramKerja::find($request->id)->select('nama_program', 'deskripsi')->first();
+            } else {
+                $sebelumnya = null;
+            }
+
+            // data
+            $data = [
                 'nama_program' => $request->nama_program,
                 'deskripsi' => $request->deskripsi
-            ]);
+            ];
+
+            // simpan data
+            ProgramKerja::updateOrCreate(['id' => $request->id], $data);
 
             // simpan riwayat aktivitas
             // Jika ada id maka simpan perubahan data, jika tidak ada id maka simpan data baru
@@ -57,13 +66,21 @@ class ProgramKerjaController extends Controller
                 RiwayatAktivitas::create([
                     'user_id' => auth()->id(),
                     'modul' => 'Program Kerja',
-                    'aktivitas' => 'Mengubah program kerja pada ID "' . $request->id . '"'
+                    'aktivitas' => 'Mengubah program kerja pada ID "' . $request->id . '"',
+                    'data' => json_encode([
+                        'sebelum' => $sebelumnya,
+                        'sesudah' => $data
+                    ])
                 ]);
             } else {
                 RiwayatAktivitas::create([
                     'user_id' => auth()->id(),
                     'modul' => 'Program Kerja',
-                    'aktivitas' => 'Menambah program kerja "' . $request->nama_program . '"'
+                    'aktivitas' => 'Menambah program kerja "' . $request->nama_program . '"',
+                    'data' => json_encode([
+                        'sebelum' => $sebelumnya,
+                        'sesudah' => $data
+                    ])
                 ]);
             }
 

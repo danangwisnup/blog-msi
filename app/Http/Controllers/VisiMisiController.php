@@ -87,19 +87,34 @@ class VisiMisiController extends Controller
             $nama_gambar_misi = VisiMisi::first()->misi_gambar;
         }
 
-        // simpan data
-        VisiMisi::first()->update([
+        // data
+        $data = [
             'visi_deskripsi' => $request->visi_deskripsi,
             'visi_gambar' => $nama_gambar_visi,
             'misi_deskripsi' => $request->misi_deskripsi,
             'misi_gambar' => $nama_gambar_misi,
+        ];
+
+        // data sebelumnya
+        $sebelumnya = VisiMisi::first([
+            'visi_deskripsi',
+            'visi_gambar',
+            'misi_deskripsi',
+            'misi_gambar'
         ]);
+
+        // simpan data
+        VisiMisi::first()->update($data);
 
         // simpan riwayat aktivitas
         RiwayatAktivitas::create([
             'user_id' => auth()->id(),
-            'modul' => 'Visi Misi',
-            'aktivitas' => 'Mengubah visi misi'
+            'modul' => 'Tentang/Visi Misi',
+            'aktivitas' => 'Mengubah tentang/visi misi',
+            'data' => json_encode([
+                'sebelum' => $sebelumnya,
+                'sesudah' => $data
+            ])
         ]);
 
         // Redirect dengan pesan sukses

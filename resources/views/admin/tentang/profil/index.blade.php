@@ -30,7 +30,8 @@
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-12">
-                                    <label for="logo" class="form-label fw-semibold mt-2">Logo</label>
+                                    <label for="logo" class="form-label fw-semibold mt-2">Logo<small
+                                            class="text-danger">*</small></label>
                                     <div id="logo_preview" class="mb-3 text-center">
                                         <div class="mb-3 text-center">
                                             <img src="{{ url('img') }}/{{ $ct_profil->logo }}"
@@ -41,23 +42,27 @@
                                         accept="image/*">
                                 </div>
                                 <div class="col-12">
-                                    <label for="blog" class="form-label fw-semibold mt-2">Nama Blog</label>
+                                    <label for="blog" class="form-label fw-semibold mt-2">Nama Blog<small
+                                            class="text-danger">*</small></label>
                                     <input type="text" class="form-control" id="nama_blog" name="nama_blog"
                                         value="{{ $ct_profil->nama_blog }}" placeholder="Masukkan Nama Blog" required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="judul_header" class="form-label fw-semibold mt-2">Judul Header</label>
+                                    <label for="judul_header" class="form-label fw-semibold mt-2">Judul Header<small
+                                            class="text-danger">*</small></label>
                                     <input type="text" class="form-control" id="judul_header" name="judul_header"
                                         value="{{ $ct_profil->judul_header }}" placeholder="Masukkan Judul Header" required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="judul_subheader" class="form-label fw-semibold mt-2">Judul Subheader</label>
+                                    <label for="judul_subheader" class="form-label fw-semibold mt-2">Judul Subheader<small
+                                            class="text-danger">*</small></label>
                                     <input type="text" class="form-control" id="judul_subheader" name="judul_subheader"
                                         value="{{ $ct_profil->judul_subheader }}" placeholder="Masukkan Judul Subheader"
                                         required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="deskripsi" class="form-label fw-semibold mt-2">Deskripsi</label>
+                                    <label for="deskripsi" class="form-label fw-semibold mt-2">Deskripsi<small
+                                            class="text-danger">*</small></label>
                                     <textarea class="form-control" id="deskripsi" name="deskripsi" rows="5" placeholder="Masukkan Deskripsi">{{ $ct_profil->deskripsi }}</textarea>
                                 </div>
                                 <div class="text-center">

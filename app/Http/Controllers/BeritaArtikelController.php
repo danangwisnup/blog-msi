@@ -51,13 +51,25 @@ class BeritaArtikelController extends Controller
                 return $item->value;
             }, $tagar));
 
-            BeritaArtikel::updateOrCreate([
-                'id' => $request->id
-            ], [
+            // data
+            $data = [
                 'tagar' => $tagar,
                 'judul' => $request->judul,
-                'isi' => $request->isi,
-            ]);
+                'isi' => $request->isi
+            ];
+
+            // sebelumnya
+            // jika id tidak ada maka data sebelumnya kosong
+            if ($request->id) {
+                $sebelumnya = BeritaArtikel::find($request->id)->select('tagar', 'judul', 'isi')->first();
+            } else {
+                $sebelumnya = null;
+            }
+
+            // simpan data
+            BeritaArtikel::updateOrCreate([
+                'id' => $request->id
+            ], $data);
 
             // simpan riwayat aktivitas
             // Jika ada id maka simpan perubahan data, jika tidak ada id maka simpan data baru
@@ -65,13 +77,21 @@ class BeritaArtikelController extends Controller
                 RiwayatAktivitas::create([
                     'user_id' => auth()->id(),
                     'modul' => 'Berita / Artikel',
-                    'aktivitas' => 'Mengubah data berita / artikel dengan judul "' . $request->judul . '"'
+                    'aktivitas' => 'Mengubah data berita / artikel dengan judul "' . $request->judul . '"',
+                    'data' => json_encode([
+                        'sebelum' => $sebelumnya,
+                        'sesudah' => $data
+                    ])
                 ]);
             } else {
                 RiwayatAktivitas::create([
                     'user_id' => auth()->id(),
                     'modul' => 'Berita / Artikel',
-                    'aktivitas' => 'Menambah data berita / artikel dengan judul "' . $request->judul . '"'
+                    'aktivitas' => 'Menambah data berita / artikel dengan judul "' . $request->judul . '"',
+                    'data' => json_encode([
+                        'sebelum' => $sebelumnya,
+                        'sesudah' => $data
+                    ])
                 ]);
             }
 
