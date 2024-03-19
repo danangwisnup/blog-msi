@@ -10,6 +10,7 @@ use App\Http\Controllers\ProgramKerjaController;
 use App\Http\Controllers\BeritaArtikelController;
 use App\Http\Controllers\PengaturanAkunController;
 use App\Http\Controllers\StrukturOrganisasiController;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +23,7 @@ use App\Http\Controllers\StrukturOrganisasiController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [BlogController::class, 'beranda']);
 
 /* -------------------------------------------------------------------------------------------- */
 /* prefix admin/*                                                                         */
@@ -43,6 +42,12 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('login', [AuthController::class, 'login'])->name('login');
             Route::post('login', [AuthController::class, 'auth_login'])->name('auth_login');
         });
+
+        /* -------------------------------------------------------------------------------------------- */
+        /* Blog                                                                                         */
+        /* -------------------------------------------------------------------------------------------- */
+        
+
     });
 
     /* ------------------------------------------------------------------------------------------------ */
