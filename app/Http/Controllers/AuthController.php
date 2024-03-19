@@ -16,7 +16,8 @@ class AuthController extends Controller
         } else {
             // Jika belum login, tampilkan form login
             return view('admin.auth.login', [
-                'title' => 'Login'
+                'title' => 'Login',
+                'ct_profil' => \App\Models\Profil::first(),
             ]);
         }
     }
