@@ -67,7 +67,8 @@
                                             <option value="100">100</option>
                                         </select>
                                     </div>
-                                    <table class="table border table-striped table-bordered align-middle text-center"
+
+                                    <table class="table table-hover table-bordered align-middle text-center"
                                         id="zero_config">
                                         <thead>
                                             <tr>
@@ -77,9 +78,9 @@
                                                 <th>Aktivitas</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody style="cursor: pointer;">
                                             @foreach ($ct_riwayatAktivitas as $item)
-                                                <tr>
+                                                <tr onclick="riwayatAktivitas({{ $item->id }})">
                                                     <td>{{ $item->created_at }}</td>
                                                     <td>{{ $item->user->name }}</td>
                                                     <td>{{ $item->modul }}</td>
@@ -98,6 +99,23 @@
             </div>
         </section>
 
+        <div class="modal fade modal-xl" id="riwayat_aktivitas" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Riwayat Aktivitas</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="riwayat-aktivitas-content"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div><!-- End Vertically centered Modal-->
+
 
         @include('layouts/admin/footer')
 
@@ -111,5 +129,69 @@
                 [0, "desc"]
             ]
         });
+
+        function riwayatAktivitas(id) {
+            $.ajax({
+                url: "{{ url('admin/riwayat-aktivitas') }}/" + id,
+                type: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    let data = JSON.parse(response.data);
+
+                    let dataSebelum = data.sebelum;
+                    let dataSesudah = data.sesudah;
+
+                    let html = '<div class="row">';
+
+                    html += '<div class="col-md-6">';
+                    // Periksa apakah dataSebelum adalah objek
+                    if (typeof dataSebelum === 'object' && dataSebelum !== null) {
+                        for (const key in dataSebelum) {
+                            if (Object.hasOwnProperty.call(dataSebelum, key)) {
+                                const element = dataSebelum[key];
+                                html += '<h5 class="card-title">' + key + '</h5>';
+                                html += '<div class="card">';
+                                html += '<div class="card-body">';
+                                html += '<pre>' + element + '</pre>';
+                                html += '</div>';
+                                html += '</div>';
+                                html += '</div>';
+                            }
+                        }
+                    }
+
+                    html += '</div>';
+
+                    // Periksa apakah dataSesudah adalah objek
+                    if (typeof dataSesudah === 'object' && dataSesudah !== null) {
+                        for (const key in dataSesudah) {
+                            if (Object.hasOwnProperty.call(dataSesudah, key)) {
+                                const element = dataSesudah[key];
+                                html += '<div class="col-md-6">';
+                                html += '<h5 class="card-title">' + key + '</h5>';
+                                html += '<div class="card">';
+                                html += '<div class="card-body">';
+                                html += '<pre>' + element + '</pre>';
+                                html += '</div>';
+                                html += '</div>';
+                                html += '</div>';
+                            }
+                        }
+                    }
+
+                    html += '</div>';
+
+                    $('#riwayat-aktivitas-content').html(html);
+
+                    $('#riwayat_aktivitas').modal('show');
+
+                },
+                error: function(response) {
+                    console.log(response);
+                },
+            });
+        }
     </script>
 @endsection

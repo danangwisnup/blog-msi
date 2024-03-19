@@ -88,5 +88,8 @@ Route::group(['prefix' => 'admin'], function () {
 
         // Route pengaturan akun
         Route::resource('pengaturan-akun', PengaturanAkunController::class);
+
+        // Route riwayat aktivitas
+        Route::get('riwayat-aktivitas/{id}', [BerandaController::class, 'riwayatAktivitas']);
     });
 });
