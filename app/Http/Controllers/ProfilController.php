@@ -13,7 +13,7 @@ class ProfilController extends Controller
      */
     public function index()
     {
-        return view('admin/tentang/profil/index', [
+        return view('admin.tentang.profil.index', [
             'title' => 'Profil'
         ]);
     }

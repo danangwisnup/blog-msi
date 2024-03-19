@@ -14,7 +14,7 @@ class KontakController extends Controller
      */
     public function index()
     {
-        return view('admin/kontak/index', [
+        return view('admin.kontak.index', [
             'title' => 'Kontak'
         ]);
     }

@@ -89,10 +89,7 @@ class ProgramKerjaController extends Controller
      */
     public function edit(ProgramKerja $programKerja)
     {
-        return view('admin.program-kerja.edit', [
-            'title' => 'Edit Program Kerja',
-            'programKerja' => $programKerja
-        ]);
+        //
     }
 
     /**

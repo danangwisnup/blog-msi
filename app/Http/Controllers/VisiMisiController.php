@@ -13,7 +13,7 @@ class VisiMisiController extends Controller
      */
     public function index()
     {
-        return view('admin/tentang/visi-misi/index', [
+        return view('admin.tentang.visi-misi.index', [
             'title' => 'Visi Misi'
         ]);
     }
