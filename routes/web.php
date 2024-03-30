@@ -25,6 +25,15 @@ use App\Http\Controllers\BlogController;
 
 Route::get('/', [BlogController::class, 'beranda']);
 
+Route::get('tentang/profil', [BlogController::class, 'tentang_profil']);
+
+Route::get('tentang/pengurus', [BlogController::class, 'tentang_pengurus']);
+
+Route::get('program-kerja', [BlogController::class, 'programKerja']);
+
+Route::get('berita-artikel', [BlogController::class, 'beritaArtikel']);
+
+Route::get('berita-artikel/1', [BlogController::class, 'beritaArtikel1']);
 /* -------------------------------------------------------------------------------------------- */
 /* prefix admin/*                                                                         */
 /* -------------------------------------------------------------------------------------------- */

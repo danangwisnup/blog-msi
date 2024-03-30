@@ -9,7 +9,7 @@
       <div class="carousel-inner" role="listbox">
 
         <!-- Slide 1 -->
-        <div class="carousel-item active" style="background-image: url(assets/img/slide/s-11.jpg);">
+        <div class="carousel-item active" style="background-image: url(public/img/img-blog/slide/s-11.jpg);">
           <div class="carousel-container">
             <div class="carousel-content animate__animated animate__fadeInUp">
               <h1 class="text-center"> YAYASAN MENTARI SEHAT INDONESIA</h1>
@@ -19,7 +19,7 @@
         </div>
 
         <!-- Slide 2 -->
-        <div class="carousel-item" style="background-image: url(assets/img/slide/s-22.jpg);">
+        <div class="carousel-item" style="background-image: url(public/img/img-blog/slide/s-22.jpg);">
           <div class="carousel-container">
             <div class="carousel-content animate__animated animate__fadeInUp">
               <h1 class="text-center"> YAYASAN MENTARI SEHAT INDONESIA</h1>
@@ -29,7 +29,7 @@
         </div>
 
         <!-- Slide 3 -->
-        <div class="carousel-item" style="background-image: url(assets/img/slide/s-33.jpg);">
+        <div class="carousel-item" style="background-image: url(public/img/img-blog/slide/s-33.jpg);">
           <div class="carousel-container">
             <div class="carousel-content animate__animated animate__fadeInUp">
               <h1 class="text-center"> YAYASAN MENTARI SEHAT INDONESIA</h1>
@@ -125,11 +125,11 @@
             <p class="text-justify">
               Mentari Sehat Indonesia Kabupaten Klaten terletak di Perum Gunungan No.19, RT.01/RW.10, Gunungan, Bareng Lor, Kec. Klaten Utara, Kabupaten Klaten, Jawa Tengah 57438
             </p>
-            <div class="text-center"><a href="" class="btn-get-started">Selengkapnya</a></div>
+            <div class="text-center"><a href="tentang/profil" class="btn-get-started">Selengkapnya</a></div>
           </div>
           <div class="col-lg-6" data-aos="fade-left">
             <div class="about-img">
-              <img src="assets/img/foto kantor.jpg" class="img-fluid" alt="">
+              <img src="public/img/img-blog/foto kantor.jpg" class="img-fluid" alt="">
             </div>
           </div>
         </div>
@@ -147,7 +147,7 @@
             <div class="col-lg-2 col-md-4 col-sm-6">
                 <div class="single-post-wrap style-white">
                     <div class="thumb">
-                        <img src="assets/img/proker/Foto Program.jpeg" alt="img">
+                        <img src="public/img/img-blog/proker/Foto Program.jpeg" alt="img">
                         <a class="tag-base tag-blue">IK</a>
                     </div>
                     <div class="details">
@@ -160,7 +160,7 @@
             <div class="col-lg-2 col-md-4 col-sm-6">
                 <div class="single-post-wrap style-white">
                     <div class="thumb">
-                        <img src="assets/img/Proker/Foto Program.jpeg" alt="img">
+                        <img src="public/img/img-blog/Proker/Foto Program.jpeg" alt="img">
                         <a class="tag-base tag-orange">Suspek</a>
                     </div>
                     <div class="details">
@@ -173,7 +173,7 @@
             <div class="col-lg-2 col-md-4 col-sm-6">
                 <div class="single-post-wrap style-white">
                     <div class="thumb">
-                        <img src="assets/img/Proker/Foto Program.jpeg" alt="img">
+                        <img src="public/img/img-blog/Proker/Foto Program.jpeg" alt="img">
                         <a class="tag-base tag-blue">CNR</a>
                     </div>
                     <div class="details">
@@ -186,7 +186,7 @@
             <div class="col-lg-2 col-md-4 col-sm-6">
                 <div class="single-post-wrap style-white">
                     <div class="thumb">
-                        <img src="assets/img/Proker/Foto Program.jpeg" alt="img">
+                        <img src="public/img/img-blog/Proker/Foto Program.jpeg" alt="img">
                         <a class="tag-base tag-orange">TPT</a>
                     </div>
                     <div class="details">
@@ -199,7 +199,7 @@
             <div class="col-lg-2 col-md-4 col-sm-6">
               <div class="single-post-wrap style-white">
                   <div class="thumb">
-                      <img src="assets/img/Proker/Foto Program.jpeg" alt="img">
+                      <img src="public/img/img-blog/Proker/Foto Program.jpeg" alt="img">
                       <a class="tag-base tag-blue">Penyuluhan</a>
                   </div>
                   <div class="details">
@@ -209,7 +209,7 @@
                   </div>
               </div>
           </div>
-          <div class="text-center"><a href="" class="btn-get-startedd">Selengkapnya</a></div>
+          <div class="text-center"><a href="program-kerja" class="btn-get-startedd">Selengkapnya</a></div>
         </div>
         </div>
     </div>  
@@ -226,7 +226,7 @@
               <h2>Latest News</h2>
             </div>
             <div class="title-link">
-              <a href="blog-grid.html">Semua Berita
+              <a href="berita-artikel">Semua Berita
                 <span class="bi bi-chevron-right"></span>
               </a>
             </div>
@@ -240,7 +240,7 @@
           <div class="carousel-item-c swiper-slide">
             <div class="card-box-b card-shadow news-box">
               <div class="img-box-b">
-                <img src="assets/img/news/news1.jpg" alt="" class="img-b img-fluid">
+                <img src="public/img/img-blog/news/news1.jpg" alt="" class="img-b img-fluid">
               </div>
               <div class="card-overlay">
                 <div class="card-header-b">
@@ -264,7 +264,7 @@
           <div class="carousel-item-c swiper-slide">
             <div class="card-box-b card-shadow news-box">
               <div class="img-box-b">
-                <img src="assets/img/news/news2.jpg" alt="" class="img-b img-fluid">
+                <img src="public/img/img-blog/news/news2.jpg" alt="" class="img-b img-fluid">
               </div>
               <div class="card-overlay">
                 <div class="card-header-b">
@@ -288,7 +288,7 @@
           <div class="carousel-item-c swiper-slide">
             <div class="card-box-b card-shadow news-box">
               <div class="img-box-b">
-                <img src="assets/img/news/news3.jpg" alt="" class="img-b img-fluid">
+                <img src="public/img/img-blog/news/news3.jpg" alt="" class="img-b img-fluid">
               </div>
               <div class="card-overlay">
                 <div class="card-header-b">
@@ -312,7 +312,7 @@
           <div class="carousel-item-c swiper-slide">
             <div class="card-box-b card-shadow news-box">
               <div class="img-box-b">
-                <img src="assets/img/news/news4-1.jpg" alt="" class="img-b img-fluid">
+                <img src="public/img/img-blog/news/news4-1.jpg" alt="" class="img-b img-fluid">
               </div>
               <div class="card-overlay">
                 <div class="card-header-b">
@@ -352,49 +352,49 @@
 
           <div class="col-lg-3 col-md-4 col-6">
             <div class="client-logo">
-              <img src="assets/img/clients/client-1.png" class="img-fluid" alt="">
+              <img src="public/img/img-blog/clients/client-1.png" class="img-fluid" alt="">
             </div>
           </div>
 
           <div class="col-lg-3 col-md-4 col-6">
             <div class="client-logo">
-              <img src="assets/img/clients/client-2.png" class="img-fluid" alt="">
+              <img src="public/img/img-blog/clients/client-2.png" class="img-fluid" alt="">
             </div>
           </div>
 
           <div class="col-lg-3 col-md-4 col-6">
             <div class="client-logo">
-              <img src="assets/img/clients/client-3.png" class="img-fluid" alt="">
+              <img src="public/img/img-blog/clients/client-3.png" class="img-fluid" alt="">
             </div>
           </div>
 
           <div class="col-lg-3 col-md-4 col-6">
             <div class="client-logo">
-              <img src="assets/img/clients/client-4.png" class="img-fluid" alt="">
+              <img src="public/img/img-blog/clients/client-4.png" class="img-fluid" alt="">
             </div>
           </div>
 
           <div class="col-lg-3 col-md-4 col-6">
             <div class="client-logo">
-              <img src="assets/img/clients/client-5.png" class="img-fluid" alt="">
+              <img src="public/img/img-blog/clients/client-5.png" class="img-fluid" alt="">
             </div>
           </div>
 
           <div class="col-lg-3 col-md-4 col-6">
             <div class="client-logo">
-              <img src="assets/img/clients/client-6.png" class="img-fluid" alt="">
+              <img src="public/img/img-blog/clients/client-6.png" class="img-fluid" alt="">
             </div>
           </div>
 
           <div class="col-lg-3 col-md-4 col-6">
             <div class="client-logo">
-              <img src="assets/img/clients/client-7.png" class="img-fluid" alt="">
+              <img src="public/img/img-blog/clients/client-7.png" class="img-fluid" alt="">
             </div>
           </div>
 
           <div class="col-lg-3 col-md-4 col-6">
             <div class="client-logo">
-              <img src="assets/img/clients/client-8.png" class="img-fluid" alt="">
+              <img src="public/img/img-blog/clients/client-8.png" class="img-fluid" alt="">
             </div>
           </div>
 
