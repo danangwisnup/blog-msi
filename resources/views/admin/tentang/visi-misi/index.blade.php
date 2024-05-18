@@ -24,7 +24,6 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <br />
                         <div class="row">
                             <form class="row g-3" method="post" action="{{ route('visi-misi.store') }}"
                                 enctype="multipart/form-data">
