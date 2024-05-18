@@ -49,6 +49,27 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link <?= request()->is('admin/galeri*') ? '' : 'collapsed' ?>" data-bs-target="#galeri-nav"
+                data-bs-toggle="collapse" href="#">
+                <i class="bi bi-images fs-5 fw-bold"></i>
+                <span>Galeri</span>
+                <i class="bi bi-chevron-down fs-5 fw-bold ms-auto"></i>
+            </a>
+            <ul id="galeri-nav" class="nav-content <?= request()->is('admin/galeri*') ? '' : 'collapse' ?>"
+                data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="<?= url('admin/galeri/foto') ?>" class="<?= $title == 'Foto' ? 'active' : '' ?>">
+                        <i class="bi bi-circle fw-bold"></i><span>Foto</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?= url('admin/galeri/video') ?>" class="<?= $title == 'Video' ? 'active' : '' ?>">
+                        <i class="bi bi-circle fw-bold"></i><span>Video</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
             <a class="nav-link <?= request()->is('admin/kontak*') ? '' : 'collapsed' ?>"
                 href="<?= url('admin/kontak') ?>">
                 <i class="bi bi-telephone fs-5 fw-bold"></i>

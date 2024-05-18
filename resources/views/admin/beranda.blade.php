@@ -130,68 +130,68 @@
             ]
         });
 
-        function riwayatAktivitas(id) {
-            $.ajax({
-                url: "{{ url('admin/riwayat-aktivitas') }}/" + id,
-                type: 'GET',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(response) {
-                    let data = JSON.parse(response.data);
+        // function riwayatAktivitas(id) {
+        //     $.ajax({
+        //         url: "{{ url('admin/riwayat-aktivitas') }}/" + id,
+        //         type: 'GET',
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         },
+        //         success: function(response) {
+        //             let data = JSON.parse(response.data);
 
-                    let dataSebelum = data.sebelum;
-                    let dataSesudah = data.sesudah;
+        //             let dataSebelum = data.sebelum;
+        //             let dataSesudah = data.sesudah;
 
-                    let html = '<div class="row">';
+        //             let html = '<div class="row">';
 
-                    html += '<div class="col-md-6">';
-                    // Periksa apakah dataSebelum adalah objek
-                    if (typeof dataSebelum === 'object' && dataSebelum !== null) {
-                        for (const key in dataSebelum) {
-                            if (Object.hasOwnProperty.call(dataSebelum, key)) {
-                                const element = dataSebelum[key];
-                                html += '<h5 class="card-title">' + key + '</h5>';
-                                html += '<div class="card">';
-                                html += '<div class="card-body">';
-                                html += '<pre>' + element + '</pre>';
-                                html += '</div>';
-                                html += '</div>';
-                                html += '</div>';
-                            }
-                        }
-                    }
+        //             html += '<div class="col-md-6">';
+        //             // Periksa apakah dataSebelum adalah objek
+        //             if (typeof dataSebelum === 'object' && dataSebelum !== null) {
+        //                 for (const key in dataSebelum) {
+        //                     if (Object.hasOwnProperty.call(dataSebelum, key)) {
+        //                         const element = dataSebelum[key];
+        //                         html += '<h5 class="card-title">' + key + '</h5>';
+        //                         html += '<div class="card">';
+        //                         html += '<div class="card-body">';
+        //                         html += '<pre>' + element + '</pre>';
+        //                         html += '</div>';
+        //                         html += '</div>';
+        //                         html += '</div>';
+        //                     }
+        //                 }
+        //             }
 
-                    html += '</div>';
+        //             html += '</div>';
 
-                    // Periksa apakah dataSesudah adalah objek
-                    if (typeof dataSesudah === 'object' && dataSesudah !== null) {
-                        for (const key in dataSesudah) {
-                            if (Object.hasOwnProperty.call(dataSesudah, key)) {
-                                const element = dataSesudah[key];
-                                html += '<div class="col-md-6">';
-                                html += '<h5 class="card-title">' + key + '</h5>';
-                                html += '<div class="card">';
-                                html += '<div class="card-body">';
-                                html += '<pre>' + element + '</pre>';
-                                html += '</div>';
-                                html += '</div>';
-                                html += '</div>';
-                            }
-                        }
-                    }
+        //             // Periksa apakah dataSesudah adalah objek
+        //             if (typeof dataSesudah === 'object' && dataSesudah !== null) {
+        //                 for (const key in dataSesudah) {
+        //                     if (Object.hasOwnProperty.call(dataSesudah, key)) {
+        //                         const element = dataSesudah[key];
+        //                         html += '<div class="col-md-6">';
+        //                         html += '<h5 class="card-title">' + key + '</h5>';
+        //                         html += '<div class="card">';
+        //                         html += '<div class="card-body">';
+        //                         html += '<pre>' + element + '</pre>';
+        //                         html += '</div>';
+        //                         html += '</div>';
+        //                         html += '</div>';
+        //                     }
+        //                 }
+        //             }
 
-                    html += '</div>';
+        //             html += '</div>';
 
-                    $('#riwayat-aktivitas-content').html(html);
+        //             $('#riwayat-aktivitas-content').html(html);
 
-                    $('#riwayat_aktivitas').modal('show');
+        //             $('#riwayat_aktivitas').modal('show');
 
-                },
-                error: function(response) {
-                    console.log(response);
-                },
-            });
-        }
+        //         },
+        //         error: function(response) {
+        //             console.log(response);
+        //         },
+        //     });
+        // }
     </script>
 @endsection

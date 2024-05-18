@@ -129,6 +129,17 @@ class ProgramKerjaController extends Controller
                 'message' => 'Tidak ada data yang dihapus!'
             ]);
         } else {
+            // simpan riwayat aktivitas
+            RiwayatAktivitas::create([
+                'user_id' => auth()->id(),
+                'modul' => 'Program Kerja',
+                'aktivitas' => 'Menghapus program kerja ' . $programKerja->nama_program,
+                'data' => json_encode([
+                    'sebelum' => $programKerja->toArray(),
+                    'sesudah' => null
+                ])
+            ]);
+
             // hapus data
             $programKerja->delete();
             return response()->json([
@@ -150,6 +161,19 @@ class ProgramKerjaController extends Controller
                 'message' => 'Tidak ada data yang dihapus!'
             ]);
         } else {
+            foreach (ProgramKerja::all() as $programKerja) {
+                // simpan riwayat aktivitas
+                RiwayatAktivitas::create([
+                    'user_id' => auth()->id(),
+                    'modul' => 'Program Kerja',
+                    'aktivitas' => 'Menghapus program kerja ' . $programKerja->nama_program,
+                    'data' => json_encode([
+                        'sebelum' => $programKerja->toArray(),
+                        'sesudah' => null
+                    ])
+                ]);
+            }
+
             // hapus semua data
             ProgramKerja::truncate();
             return response()->json([

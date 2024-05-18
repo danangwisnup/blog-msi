@@ -41,6 +41,35 @@
                                     <input type="file" class="form-control" id="logo" name="logo"
                                         accept="image/*">
                                 </div>
+
+                                <div class="col-12">
+                                    <label for="foto_sampul" class="form-label fw-semibold mt-2">Foto Sampul<small
+                                            class="text-danger">*</small></label>
+                                    <div id="foto_sampul_preview" class="mb-3 text-center">
+                                        <div class="mb-3 text-center">
+                                            <img src="{{ url('img') }}/{{ $ct_profil->foto_sampul }}"
+                                                class="img-fluid img-thumbnail" style="max-width: 200px" alt="Foto Main">
+                                        </div>
+                                    </div>
+                                    <input type="file" class="form-control" id="foto_sampul" name="foto_sampul"
+                                        accept="image/*">
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="foto_tentang" class="form-label fw-semibold mt-2">Foto Tentang<small
+                                            class="text-danger">*</small></label>
+                                    <div id="foto_tentang_preview" class="mb-3 text-center">
+                                        <div class="mb-3 text-center">
+                                            <img src="{{ url('img') }}/{{ $ct_profil->foto_tentang }}"
+                                                class="img-fluid img-thumbnail" style="max-width: 200px" alt="Foto About">
+                                        </div>
+                                    </div>
+                                    <input type="file" class="form-control" id="foto_tentang" name="foto_tentang"
+                                        accept="image/*">
+                                </div>
+
+
+
                                 <div class="col-12">
                                     <label for="blog" class="form-label fw-semibold mt-2">Nama Blog<small
                                             class="text-danger">*</small></label>
@@ -95,11 +124,47 @@
             reader.readAsDataURL(this.files[0]);
         });
 
+        $('#foto_sampul').change(function() {
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                $('#foto_sampul_preview').html(
+                    `<img src="${e.target.result}" class="img-fluid img-thumbnail" style="max-width: 200px" alt="Foto Main">` +
+                    `<button type="button" class="btn btn-danger ms-2" id="hapus_foto_sampul">Hapus Foto</button>`
+                );
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
+
+        $('#foto_tentang').change(function() {
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                $('#foto_tentang_preview').html(
+                    `<img src="${e.target.result}" class="img-fluid img-thumbnail" style="max-width: 200px" alt="Foto About">` +
+                    `<button type="button" class="btn btn-danger ms-2" id="hapus_foto_tentang">Hapus Foto</button>`
+                );
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
+
         // jika tombol hapus logo diklik
         $(document).on('click', '#hapus_logo', function() {
             $('#logo').val('');
             $('#logo_preview').html(
                 '<div class="mb-3 text-center"><img src="{{ url('img') }}/{{ $ct_profil->logo }}" class="img-fluid img-thumbnail" style="max-width: 200px" alt="Logo"></div>'
+            );
+        });
+
+        $(document).on('click', '#hapus_foto_sampul', function() {
+            $('#foto_sampul').val('');
+            $('#foto_sampul_preview').html(
+                '<div class="mb-3 text-center"><img src="{{ url('img') }}/{{ $ct_profil->foto_sampul }}" class="img-fluid img-thumbnail" style="max-width: 200px" alt="Foto Main"></div>'
+            );
+        });
+
+        $(document).on('click', '#hapus_foto_tentang', function() {
+            $('#foto_tentang').val('');
+            $('#foto_tentang_preview').html(
+                '<div class="mb-3 text-center"><img src="{{ url('img') }}/{{ $ct_profil->foto_tentang }}" class="img-fluid img-thumbnail" style="max-width: 200px" alt="Foto About"></div>'
             );
         });
     </script>

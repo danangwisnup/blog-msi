@@ -38,25 +38,42 @@ class KontakController extends Controller
                 'email' => 'required|email',
                 'ig' => 'required',
                 'wa' => 'required',
-                'alamat_kantor' => 'required'
+                'alamat_kantor' => 'required',
+                'google_maps' => 'required'
             ], [
                 'email.required' => 'Email harus diisi',
                 'email.email' => 'Email tidak valid',
                 'ig.required' => 'Instagram harus diisi',
                 'wa.required' => 'Whatsapp harus diisi',
-                'alamat_kantor.required' => 'Alamat kantor harus diisi'
+                'alamat_kantor.required' => 'Alamat kantor harus diisi',
+                'google_maps.required' => 'Google Maps harus diisi'
             ]);
+
+            // Define the regular expression pattern
+            $pattern = '/<iframe[^>]*src="([^"]*)"/i';
+
+            // Execute the regular expression
+            if (preg_match($pattern, $request->google_maps, $matches)) {
+                // The captured group 1 contains the src value
+                $google_maps = $matches[1];
+            } else {
+                $google_maps = $request->google_maps;
+            }
+
+            // jika data map tidak valid
+            // karena tidak memiliki https://www.google.com/maps/embed?pb=
+            if (!str_contains($google_maps, 'https://www.google.com/maps/embed?pb=')) {
+                return redirect()->back()->with('error', 'Google Maps tidak valid!')->withInput();
+            }
 
             // data
             $data = [
                 'email' => $request->email,
                 'ig' => $request->ig,
                 'wa' => $request->wa,
-                'alamat_kantor' => $request->alamat_kantor
+                'alamat_kantor' => $request->alamat_kantor,
+                'google_maps' => $google_maps
             ];
-
-            // sebelumnya
-            $sebelumnya = Kontak::first()->select('email', 'ig', 'wa', 'alamat_kantor')->first();
 
             // update data first
             Kontak::first()->update($data);
@@ -67,7 +84,7 @@ class KontakController extends Controller
                 'modul' => 'Kontak',
                 'aktivitas' => 'Mengubah kontak',
                 'data' => json_encode([
-                    'sebelum' => $sebelumnya,
+                    'sebelum' => Kontak::first()->toArray(),
                     'sesudah' => $data
                 ])
             ]);

@@ -12,14 +12,16 @@ class Controller extends BaseController
 
     public function __construct()
     {
-        $beritaArtikel = \App\Models\BeritaArtikel::all();
+        $beritaArtikel = \App\Models\BeritaArtikel::all()->sortByDesc('updated_at');
         $kontak = \App\Models\Kontak::first();
-        $strukturOrganisasi = \App\Models\StrukturOrganisasi::all();
+        $strukturOrganisasi = \App\Models\StrukturOrganisasi::all()->sortByDesc('updated_at');
         $profil = \App\Models\Profil::first();
-        $programKerja = \App\Models\ProgramKerja::all();
-        $user = \App\Models\User::all();
+        $programKerja = \App\Models\ProgramKerja::all()->sortByDesc('updated_at');
+        $user = \App\Models\User::all()->sortByDesc('updated_at');
         $visiMisi = \App\Models\VisiMisi::first();
-        $riwayatAktivitas = \App\Models\RiwayatAktivitas::all();
+        $riwayatAktivitas = \App\Models\RiwayatAktivitas::all()->sortByDesc('updated_at');
+        $foto = \App\Models\Foto::all()->sortByDesc('updated_at');
+        $video = \App\Models\Video::all()->sortByDesc('updated_at');
 
         view()->share('ct_beritaArtikel', $beritaArtikel);
         view()->share('ct_kontak', $kontak);
@@ -29,5 +31,7 @@ class Controller extends BaseController
         view()->share('ct_user', $user);
         view()->share('ct_visiMisi', $visiMisi);
         view()->share('ct_riwayatAktivitas', $riwayatAktivitas);
+        view()->share('ct_foto', $foto);
+        view()->share('ct_video', $video);
     }
 }

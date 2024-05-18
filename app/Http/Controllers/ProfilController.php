@@ -35,6 +35,8 @@ class ProfilController extends Controller
         try {
             $request->validate([
                 'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5048',
+                'foto_sampul' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10048',
+                'foto_tentang' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10048',
                 'nama_blog' => 'required',
                 'judul_header' => 'required',
                 'judul_subheader' => 'required',
@@ -43,6 +45,12 @@ class ProfilController extends Controller
                 'logo.image' => 'Logo harus berupa gambar',
                 'logo.mimes' => 'Logo harus berformat jpeg, png, jpg, gif, atau svg',
                 'logo.max' => 'Ukuran logo maksimal 5MB',
+                'foto_sampul.image' => 'Foto sampul harus berupa gambar',
+                'foto_sampul.mimes' => 'Foto sampul harus berformat jpeg, png, jpg, gif, atau svg',
+                'foto_sampul.max' => 'Ukuran foto sampul maksimal 10MB',
+                'foto_tentang.image' => 'Foto tentang harus berupa gambar',
+                'foto_tentang.mimes' => 'Foto tentang harus berformat jpeg, png, jpg, gif, atau svg',
+                'foto_tentang.max' => 'Ukuran foto tentang maksimal 10MB',
                 'nama_blog.required' => 'Nama blog wajib diisi',
                 'judul_header.required' => 'Judul header wajib diisi',
                 'judul_subheader.required' => 'Judul subheader wajib diisi',
@@ -69,17 +77,50 @@ class ProfilController extends Controller
             $nama_logo = Profil::first()->logo;
         }
 
+        // upload foto sampul jika ada
+        if ($request->hasFile('foto_sampul')) {
+            $file = $request->file('foto_sampul');
+            $nama_foto_sampul = 'foto_sampul_' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('img'), $nama_foto_sampul);
+
+            // hapus foto sampul lama jika ada di direktori
+            if (Profil::first()->foto_sampul != 'null') {
+                $file_path = public_path('img') . '/' . Profil::first()->foto_sampul;
+                if (file_exists($file_path)) {
+                    unlink($file_path);
+                }
+            }
+        } else {
+            $nama_foto_sampul = Profil::first()->foto_sampul;
+        }
+
+        // upload foto tentang jika ada
+        if ($request->hasFile('foto_tentang')) {
+            $file = $request->file('foto_tentang');
+            $nama_foto_tentang = 'foto_tentang_' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('img'), $nama_foto_tentang);
+
+            // hapus foto tentang lama jika ada di direktori
+            if (Profil::first()->foto_tentang != 'null') {
+                $file_path = public_path('img') . '/' . Profil::first()->foto_tentang;
+                if (file_exists($file_path)) {
+                    unlink($file_path);
+                }
+            }
+        } else {
+            $nama_foto_tentang = Profil::first()->foto_tentang;
+        }
+
         // data
         $data = [
             'logo' => $nama_logo,
+            'foto_sampul' => $nama_foto_sampul,
+            'foto_tentang' => $nama_foto_tentang,
             'nama_blog' => $request->nama_blog,
             'judul_header' => $request->judul_header,
             'judul_subheader' => $request->judul_subheader,
             'deskripsi' => $request->deskripsi
         ];
-
-        // data sebelumnya
-        $sebelumnya = Profil::first()->select('logo', 'nama_blog', 'judul_header', 'judul_subheader', 'deskripsi')->first();
 
         // simpan data
         Profil::first()->update($data);
@@ -90,7 +131,7 @@ class ProfilController extends Controller
             'modul' => 'Tentang/Profil',
             'aktivitas' => 'Mengubah tentang/profil',
             'data' => json_encode([
-                'sebelum' => $sebelumnya,
+                'sebelum' => $request->id ? Profil::first()->toArray() : null,
                 'sesudah' => $data
             ])
         ]);

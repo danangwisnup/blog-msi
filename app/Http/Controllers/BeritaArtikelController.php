@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BeritaArtikel;
+use App\Models\Foto;
 use App\Models\RiwayatAktivitas;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -38,12 +39,19 @@ class BeritaArtikelController extends Controller
             $request->validate([
                 'tagar' => 'required',
                 'judul' => 'required|unique:berita_artikels,judul,' . $request->id,
-                'isi' => 'required'
+                'isi' => 'required',
+                'foto_upload' => 'image|mimes:jpg,jpeg,png|max:10240',
+                'tanggal' => 'required|date'
             ], [
                 'tagar.required' => 'Tagar harus diisi',
                 'judul.required' => 'Judul harus diisi',
                 'judul.unique' => 'Judul sudah ada',
                 'isi.required' => 'Isi harus diisi',
+                'foto_upload.image' => 'Foto harus berupa gambar',
+                'foto_upload.mimes' => 'Foto harus berformat jpg, jpeg, png',
+                'foto_upload.max' => 'Foto maksimal berukuran 10MB',
+                'tanggal.required' => 'Tanggal harus diisi',
+                'tanggal.date' => 'Tanggal harus berformat tanggal'
             ]);
 
             $tagar = json_decode($request->tagar);
@@ -51,49 +59,69 @@ class BeritaArtikelController extends Controller
                 return $item->value;
             }, $tagar));
 
+            // jika ada file foto
+            if ($request->hasFile('foto_upload')) {
+                // simpan foto dengan nama acak
+                $file = $request->file('foto_upload');
+                $nama_foto = 'foto_' . time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('img/'), $nama_foto);
+
+                // insert ke foto database
+                Foto::create([
+                    'nama' => $request->judul,
+                    'foto' => $nama_foto,
+                    'deskripsi' => $request->judul,
+                ]);
+            }
+
+            // jika tidak ada file foto
+            if ($request->foto_pilih == null && $request->foto_upload == null) {
+                // jika id ada maka foto tetap
+                if ($request->id) {
+                    $nama_foto = BeritaArtikel::find($request->id)->foto;
+                } else {
+                    $nama_foto = 'default.jpg';
+                }
+            } else {
+                // jika ada foto_pilih gunakan, tetapi jika tidak ada gunakan foto_upload
+                $nama_foto = $request->foto_pilih ?? $nama_foto;
+            }
+
+            // hilangkan spasi
+            $tagar = str_replace(',  ', ', ', $tagar);
+
             // data
             $data = [
-                'tagar' => $tagar,
+                'foto' => $nama_foto,
+                'tagar' => strtolower($tagar),
                 'judul' => $request->judul,
-                'isi' => $request->isi
+                'slug' => strtolower(str_replace(' ', '-', $request->judul)),
+                'isi' => $request->isi,
+                'updated_at' => $request->tanggal ? $request->tanggal . ' ' . now()->format('H:i:s') : now()
             ];
 
-            // sebelumnya
-            // jika id tidak ada maka data sebelumnya kosong
-            if ($request->id) {
-                $sebelumnya = BeritaArtikel::find($request->id)->select('tagar', 'judul', 'isi')->first();
-            } else {
-                $sebelumnya = null;
+            // validasi isi jika terdapat gambar yang berukuran lebih dari maximal 10 mb
+            if (strlen($data['isi']) > 5 * 1024 * 1024) {
+                return redirect()->back()->with('error', 'Isi berita / artikel terlalu besar!')->withInput();
             }
 
             // simpan data
-            BeritaArtikel::updateOrCreate([
-                'id' => $request->id
-            ], $data);
-
-            // simpan riwayat aktivitas
-            // Jika ada id maka simpan perubahan data, jika tidak ada id maka simpan data baru
             if ($request->id) {
-                RiwayatAktivitas::create([
-                    'user_id' => auth()->id(),
-                    'modul' => 'Berita / Artikel',
-                    'aktivitas' => 'Mengubah data berita / artikel dengan judul "' . $request->judul . '"',
-                    'data' => json_encode([
-                        'sebelum' => $sebelumnya,
-                        'sesudah' => $data
-                    ])
-                ]);
+                BeritaArtikel::find($request->id)->update($data);
             } else {
-                RiwayatAktivitas::create([
-                    'user_id' => auth()->id(),
-                    'modul' => 'Berita / Artikel',
-                    'aktivitas' => 'Menambah data berita / artikel dengan judul "' . $request->judul . '"',
-                    'data' => json_encode([
-                        'sebelum' => $sebelumnya,
-                        'sesudah' => $data
-                    ])
-                ]);
+                BeritaArtikel::create($data);
             }
+
+            // Jika ada id maka simpan perubahan data, jika tidak ada id maka simpan data baru
+            RiwayatAktivitas::create([
+                'user_id' => auth()->id(),
+                'modul' => 'Berita / Artikel',
+                'aktivitas' => $request->id ? 'Mengubah berita / artikel ' . $data['judul'] : 'Menyimpan berita / artikel ' . $data['judul'],
+                'data' => json_encode([
+                    'sebelum' => $request->id ? BeritaArtikel::find($request->id)->toArray() : null,
+                    'sesudah' => $data
+                ])
+            ]);
 
             return redirect()->back()->with('success', 'Berita / Artikel berhasil disimpan!');
         } catch (ValidationException $e) {
@@ -140,6 +168,18 @@ class BeritaArtikelController extends Controller
                 'message' => 'Tidak ada data yang dihapus!'
             ]);
         } else {
+            // simpan riwayat aktivitas
+            RiwayatAktivitas::create([
+                'user_id' => auth()->id(),
+                'modul' => 'Berita / Artikel',
+                'aktivitas' => 'Menghapus berita / artikel ' . $beritaArtikel->judul,
+                'data' => json_encode([
+                    'sebelum' => $beritaArtikel->toArray(),
+                    'sesudah' => null
+                ])
+            ]);
+
+            // hapus data
             $beritaArtikel->delete();
             return response()->json([
                 'status' => 'success',
@@ -160,6 +200,20 @@ class BeritaArtikelController extends Controller
                 'message' => 'Tidak ada data yang dihapus!'
             ]);
         } else {
+            foreach (BeritaArtikel::all() as $beritaArtikel) {
+                // simpan riwayat aktivitas
+                RiwayatAktivitas::create([
+                    'user_id' => auth()->id(),
+                    'modul' => 'Berita / Artikel',
+                    'aktivitas' => 'Menghapus berita / artikel ' . $beritaArtikel->judul,
+                    'data' => json_encode([
+                        'sebelum' => $beritaArtikel->toArray(),
+                        'sesudah' => null
+                    ])
+                ]);
+            }
+
+            // hapus semua data
             BeritaArtikel::truncate();
             return response()->json([
                 'status' => 'success',

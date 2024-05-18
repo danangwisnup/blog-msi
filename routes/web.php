@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\FotoController;
+use App\Http\Controllers\VideoController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\BerandaController;
@@ -10,7 +13,6 @@ use App\Http\Controllers\ProgramKerjaController;
 use App\Http\Controllers\BeritaArtikelController;
 use App\Http\Controllers\PengaturanAkunController;
 use App\Http\Controllers\StrukturOrganisasiController;
-use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,11 +25,46 @@ use App\Http\Controllers\BlogController;
 |
 */
 
+
+/* -------------------------------------------------------------------------------------------- */
+/* prefix /BlogController.php                                                                   */
+/* -------------------------------------------------------------------------------------------- */
+
+// Route beranda
 Route::get('/', [BlogController::class, 'beranda']);
+Route::post('/', [BlogController::class, 'beranda']);
+
+// Route tentang
+Route::group(['prefix' => 'tentang'], function () {
+    Route::get('profil', [BlogController::class, 'profil']);
+    Route::get('visi-misi', [BlogController::class, 'visiMisi']);
+    Route::get('struktur-organisasi', [BlogController::class, 'strukturOrganisasi']);
+});
+
+// Route program kerja
+Route::get('/program-kerja', [BlogController::class, 'programKerja']);
+
+// Route galeri
+Route::group(['prefix' => 'galeri'], function () {
+    Route::get('foto', [BlogController::class, 'galeriFoto'])->name('galeri-foto');
+    Route::get('video', [BlogController::class, 'galeriVideo'])->name('galeri-video');
+});
+
+// Route berita artikel
+Route::get('/berita-artikel', [BlogController::class, 'beritaArtikel'])->name('berita-artikel');
+Route::get('/berita-artikel/{id}', [BlogController::class, 'beritaArtikel'])->name('berita-artikel.detail');
+
+// Route kontak
+Route::get('/kontak', [BlogController::class, 'kontak']);
+
+
+/* -------------------------------------------------------------------------------------------- */
+
 
 /* -------------------------------------------------------------------------------------------- */
 /* prefix admin/*                                                                         */
 /* -------------------------------------------------------------------------------------------- */
+
 Route::group(['prefix' => 'admin'], function () {
 
     /* ------------------------------------------------------------------------------------------------ */
@@ -46,8 +83,6 @@ Route::group(['prefix' => 'admin'], function () {
         /* -------------------------------------------------------------------------------------------- */
         /* Blog                                                                                         */
         /* -------------------------------------------------------------------------------------------- */
-        
-
     });
 
     /* ------------------------------------------------------------------------------------------------ */
@@ -88,6 +123,19 @@ Route::group(['prefix' => 'admin'], function () {
         Route::delete('berita-artikel/destroy-all', [BeritaArtikelController::class, 'destroyAll'])->name('berita-artikel.destroy-all');
         Route::resource('berita-artikel', BeritaArtikelController::class);
 
+        /* -------------------------------------------------------------------------------------------- */
+        /* prefix galeri/*                                                                             */
+        /* -------------------------------------------------------------------------------------------- */
+        Route::group(['prefix' => 'galeri'], function () {
+            // Route foto
+            Route::delete('foto/destroy-all', [FotoController::class, 'destroyAll'])->name('foto.destroy-all');
+            Route::resource('foto', FotoController::class);
+
+            // Route video
+            Route::delete('video/destroy-all', [VideoController::class, 'destroyAll'])->name('video.destroy-all');
+            Route::resource('video', VideoController::class);
+        });
+
         // Route kontak
         Route::resource('kontak', KontakController::class);
 
@@ -98,3 +146,5 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('riwayat-aktivitas/{id}', [BerandaController::class, 'riwayatAktivitas']);
     });
 });
+
+/* -------------------------------------------------------------------------------------------- */

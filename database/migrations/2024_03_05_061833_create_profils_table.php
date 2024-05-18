@@ -15,6 +15,8 @@ return new class extends Migration
         Schema::create('profils', function (Blueprint $table) {
             $table->id();
             $table->text('logo');
+            $table->text('foto_sampul')->nullable();
+            $table->text('foto_tentang')->nullable();
             $table->string('nama_blog');
             $table->string('judul_header');
             $table->string('judul_subheader');
@@ -24,9 +26,11 @@ return new class extends Migration
 
         DB::table('profils')->insert([
             'logo' => 'msi.png',
-            'nama_blog' => 'Blog Saya',
-            'judul_header' => 'Selamat Datang di Blog Saya',
-            'judul_subheader' => 'Blog ini berisi tentang...',
+            'foto_sampul' => 'sampul.jpg',
+            'foto_tentang' => 'tentang.jpg',
+            'nama_blog' => 'Mentari Sehat Indonesia Kab. Kudus',
+            'judul_header' => 'Mentari Sehat Indonesia',
+            'judul_subheader' => 'Kab. Kudus',
             'deskripsi' => 'Blog ini berisi tentang...',
             'created_at' => now(),
             'updated_at' => now(),

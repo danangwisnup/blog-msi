@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('ig');
             $table->string('wa');
             $table->string('alamat_kantor');
+            $table->text('google_maps')->nullable();
             $table->timestamps();
         });
 

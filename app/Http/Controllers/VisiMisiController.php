@@ -95,14 +95,6 @@ class VisiMisiController extends Controller
             'misi_gambar' => $nama_gambar_misi,
         ];
 
-        // data sebelumnya
-        $sebelumnya = VisiMisi::first([
-            'visi_deskripsi',
-            'visi_gambar',
-            'misi_deskripsi',
-            'misi_gambar'
-        ]);
-
         // simpan data
         VisiMisi::first()->update($data);
 
@@ -112,7 +104,7 @@ class VisiMisiController extends Controller
             'modul' => 'Tentang/Visi Misi',
             'aktivitas' => 'Mengubah tentang/visi misi',
             'data' => json_encode([
-                'sebelum' => $sebelumnya,
+                'sebelum' => $request->id ? VisiMisi::find($request->id)->toArray() : null,
                 'sesudah' => $data
             ])
         ]);

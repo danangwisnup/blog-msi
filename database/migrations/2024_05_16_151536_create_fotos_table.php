@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -11,15 +12,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('berita_artikels', function (Blueprint $table) {
+        Schema::create('fotos', function (Blueprint $table) {
             $table->id();
-            $table->text('foto')->nullable();
-            $table->text('tagar');
-            $table->string('judul');
-            $table->string('slug');
-            $table->text('isi');
+            $table->text('nama');
+            $table->text('foto');
             $table->timestamps();
         });
+
+        // Add LONGBLOB column
+        DB::statement('ALTER TABLE fotos ADD deskripsi LONGBLOB');
     }
 
     /**
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('berita_artikels');
+        Schema::dropIfExists('fotos');
     }
 };

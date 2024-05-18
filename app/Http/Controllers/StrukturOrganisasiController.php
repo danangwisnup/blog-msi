@@ -78,39 +78,18 @@ class StrukturOrganisasiController extends Controller
             $data['foto'] = $nama_foto;
         }
 
-        // data sebelumnya, ambil seperti $data
-        // jika id kosong maka data sebelumnya kosong
-        if ($request->id) {
-            $sebelumnya = StrukturOrganisasi::find($request->id)->select('nama', 'jabatan', 'foto')->first();
-        } else {
-            $sebelumnya = null;
-        }
-
         StrukturOrganisasi::updateOrCreate(['id' => $request->id], $data);
 
         // simpan riwayat aktivitas
-        // Jika ada id maka simpan perubahan data, jika tidak ada id maka simpan data baru
-        if ($request->id) {
-            RiwayatAktivitas::create([
-                'user_id' => auth()->id(),
-                'modul' => 'Tentang/Struktur Organisasi',
-                'aktivitas' => 'Mengubah tentang/struktur organisasi pada ID "' . $request->id . '"',
-                'data' => json_encode([
-                    'sebelum' => $sebelumnya,
-                    'sesudah' => $data
-                ])
-            ]);
-        } else {
-            RiwayatAktivitas::create([
-                'user_id' => auth()->id(),
-                'modul' => 'Tentang/Struktur Organisasi',
-                'aktivitas' => 'Menambah tentang/struktur organisasi "' . $request->nama . '"',
-                'data' => json_encode([
-                    'sebelum' => $sebelumnya,
-                    'sesudah' => $data
-                ])
-            ]);
-        }
+        RiwayatAktivitas::create([
+            'user_id' => auth()->id(),
+            'modul' => 'Tentang/Struktur Organisasi',
+            'aktivitas' => $request->id ? 'Mengubah data struktur organisasi ' . $data['nama'] : 'Menambah data struktur organisasi ' . $data['nama'],
+            'data' => json_encode([
+                'sebelum' => $request->id ? StrukturOrganisasi::find($request->id)->toArray() : null,
+                'sesudah' => $data
+            ])
+        ]);
 
         return redirect()->back()->with('success', 'Data berhasil ditambahkan.');
     }
@@ -154,6 +133,17 @@ class StrukturOrganisasiController extends Controller
                 'message' => 'Tidak ada data yang dihapus!'
             ]);
         } else {
+            // simpan riwayat aktivitas
+            RiwayatAktivitas::create([
+                'user_id' => auth()->id(),
+                'modul' => 'Tentang/Struktur Organisasi',
+                'aktivitas' => 'Menghapus data struktur organisasi ' . $strukturOrganisasi->nama,
+                'data' => json_encode([
+                    'sebelum' => $strukturOrganisasi->toArray(),
+                    'sesudah' => null
+                ])
+            ]);
+
             // hapus data
             $strukturOrganisasi->delete();
             return response()->json([
@@ -174,6 +164,19 @@ class StrukturOrganisasiController extends Controller
                 'message' => 'Tidak ada data yang dihapus!'
             ]);
         } else {
+            foreach (StrukturOrganisasi::all() as $strukturOrganisasi) {
+                // simpan riwayat aktivitas
+                RiwayatAktivitas::create([
+                    'user_id' => auth()->id(),
+                    'modul' => 'Tentang/Struktur Organisasi',
+                    'aktivitas' => 'Menghapus data struktur organisasi ' . $strukturOrganisasi->nama,
+                    'data' => json_encode([
+                        'sebelum' => $strukturOrganisasi->toArray(),
+                        'sesudah' => null
+                    ])
+                ]);
+            }
+
             // hapus semua data
             StrukturOrganisasi::truncate();
             return response()->json([
