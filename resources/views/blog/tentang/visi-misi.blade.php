@@ -35,7 +35,7 @@
                             alt="">
                     </div>
                     <div class="col-lg-9">
-                        {{ strip_tags($ct_visiMisi->visi_deskripsi) }}
+                        {!! $ct_visiMisi->visi_deskripsi !!}
                     </div>
 
                     <div> <strong>Misi</strong> </div>

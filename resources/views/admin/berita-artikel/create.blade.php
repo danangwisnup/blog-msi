@@ -59,22 +59,25 @@
 
                                     <div class="text-center" id="foto_preview">
                                         @if (isset($beritaArtikel))
-                                            <img src="{{ asset('img/' . $beritaArtikel->foto) }}"
-                                                alt="Foto Thumbnail" class="img-thumbnail mt-2" width="450">
+                                            <img src="{{ asset('img/' . $beritaArtikel->foto) }}" alt="Foto Thumbnail"
+                                                class="img-thumbnail mt-2" width="450">
                                         @endif
                                     </div>
+                                    <small class="text-danger">
+                                        * Gunakan foto landscape dengan ukuran 16:9, agar tampilan lebih baik
+                                    </small>
                                 </div>
 
                                 <div class="col-12">
                                     <label for="tag" class="form-label fw-semibold mt-2">Tagar<small
                                             class="text-danger">*</small></label>
-                                    <input type="tagar" class="form-control" id="tagar" name="tagar"
+                                    <input type="tagar" class="form-control text-capitalize" id="tagar" name="tagar"
                                         value="{{ $beritaArtikel->tagar ?? old('tagar') }}" placeholder="Masukkan Tagar">
                                 </div>
                                 <div class="col-12">
                                     <label for="judul" class="form-label fw-semibold mt-2">Judul<small
                                             class="text-danger">*</small></label>
-                                    <input type="text" class="form-control" id="judul" name="judul"
+                                    <input type="text" class="form-control text-capitalize" id="judul" name="judul"
                                         value="{{ $beritaArtikel->judul ?? old('judul') }}" placeholder="Masukkan Judul">
                                 </div>
                                 <div class="col-12">

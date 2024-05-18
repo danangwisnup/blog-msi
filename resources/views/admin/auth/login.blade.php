@@ -11,7 +11,7 @@
                                 <div class="pt-4 pb-2">
                                     <h5 class="card-title text-center pb-0 fs-4">Masuk ke Admin Panel</h5>
                                     <p class="text-center small">
-                                        Lengkapi email dan kata sandi dibawah ini untuk melanjutkan.
+                                        Masukkan email dan kata sandi dibawah ini untuk melanjutkan.
                                     </p>
                                 </div>
 
@@ -29,7 +29,7 @@
                                     <div class="col-12 mb-3">
                                         <label for="email" class="form-label">Email<small
                                                 class="text-danger">*</small></label>
-                                        <input type="email" class="form-control" name="email" id="email" required>
+                                        <input type="email" class="form-control" name="email" id="email" autofocus required>
                                         <div class="invalid-feedback">Silahkan masukkan email anda!</div>
                                     </div>
 

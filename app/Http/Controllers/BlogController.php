@@ -79,6 +79,14 @@ class BlogController extends Controller
         if ($search) {
             $beritaArtikel = \App\Models\BeritaArtikel::orderByDesc('updated_at')->where('judul', 'like', '%' . $search . '%')->paginate(5);
 
+            if ($beritaArtikel->isEmpty()) {
+                return view('blog.berita-artikel', [
+                    'title' => 'Berita & Artikel',
+                    'search' => false,
+                    'detail' => false
+                ], compact('beritaArtikel'));
+            }
+
             return view('blog.berita-artikel', [
                 'title' => 'Berita & Artikel',
                 'detail' => false
@@ -97,7 +105,7 @@ class BlogController extends Controller
             ], compact('beritaArtikel'));
         }
 
-        $beritaArtikel = \App\Models\BeritaArtikel::orderByDesc('updated_at')->paginate(1);
+        $beritaArtikel = \App\Models\BeritaArtikel::orderByDesc('updated_at')->paginate(5);
 
         return view('blog.berita-artikel', [
             'title' => 'Berita & Artikel',

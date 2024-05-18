@@ -30,14 +30,8 @@
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-12">
-                                    <label for="visi_gambar" class="form-label fw-semibold mt-2">Visi<small
+                                    <label for="visi_gambar" class="form-label fw-semibold">Visi<small
                                             class="text-danger">*</small></label>
-                                    <div id="visi_preview" class="mb-3 text-center">
-                                        <img src="{{ url('img') }}/{{ $ct_visiMisi->visi_gambar }}" alt="visi_gambar"
-                                            class="img-fluid img-thumbnail" style="width: 200px;">
-                                    </div>
-                                    <input type="file" class="form-control" id="visi_gambar" name="visi_gambar"
-                                        accept="image/*">
                                 </div>
                                 <div class="col-12 mt-3">
                                     <textarea class="form-control" id="visi_deskripsi" name="visi_deskripsi" rows="5"
@@ -46,12 +40,6 @@
                                 <div class="col-12">
                                     <label for="misi_gambar" class="form-label fw-semibold mt-2">Misi<small
                                             class="text-danger">*</small></label>
-                                    <div id="misi_preview" class="mb-3 text-center">
-                                        <img src="{{ url('img') }}/{{ $ct_visiMisi->misi_gambar }}" alt="misi_gambar"
-                                            class="img-fluid img-thumbnail" style="width: 200px;">
-                                    </div>
-                                    <input type="file" class="form-control" id="misi_gambar" name="misi_gambar"
-                                        accept="image/*">
                                 </div>
                                 <div class="col-12 mt-3">
                                     <textarea class="form-control" id="misi_deskripsi" name="misi_deskripsi" rows="5"

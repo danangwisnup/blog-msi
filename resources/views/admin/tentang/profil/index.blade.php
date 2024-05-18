@@ -115,6 +115,19 @@
     <script>
         // jika ada file yang dipilih
         $('#logo').change(function() {
+            // validate ukuran file
+            if (this.files[0].size > 5 * 1024 * 1024) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ukuran file terlalu besar! Maksimal 5 MB.'
+                });
+                this.value = '';
+                $('#logo_preview').html(
+                    '<div class="mb-3 text-center"><img src="{{ url('img') }}/{{ $ct_profil->logo }}" class="img-fluid img-thumbnail" style="max-width: 200px" alt="Logo"></div>'
+                );
+            }
+
             let reader = new FileReader();
             reader.onload = (e) => {
                 $('#logo_preview').html(
@@ -125,6 +138,19 @@
         });
 
         $('#foto_sampul').change(function() {
+            // validate ukuran file
+            if (this.files[0].size > 5 * 1024 * 1024) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ukuran file terlalu besar! Maksimal 5 MB.'
+                });
+                this.value = '';
+                $('#foto_sampul_preview').html(
+                    '<div class="mb-3 text-center"><img src="{{ url('img') }}/{{ $ct_profil->foto_sampul }}" class="img-fluid img-thumbnail" style="max-width: 200px" alt="Foto Main"></div>'
+                );
+            }
+
             let reader = new FileReader();
             reader.onload = (e) => {
                 $('#foto_sampul_preview').html(
@@ -136,6 +162,19 @@
         });
 
         $('#foto_tentang').change(function() {
+            // validate ukuran file
+            if (this.files[0].size > 5 * 1024 * 1024) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ukuran file terlalu besar! Maksimal 5 MB.'
+                });
+                this.value = '';
+                $('#foto_tentang_preview').html(
+                    '<div class="mb-3 text-center"><img src="{{ url('img') }}/{{ $ct_profil->foto_tentang }}" class="img-fluid img-thumbnail" style="max-width: 200px" alt="Foto About"></div>'
+                );
+            }
+
             let reader = new FileReader();
             reader.onload = (e) => {
                 $('#foto_tentang_preview').html(

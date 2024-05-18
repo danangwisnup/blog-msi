@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="member-info">
                                     <h4>{{ $pengurus->nama }}</h4>
-                                    <span>{{ $pengurus->jabatan }}</span>
+                                    <h6>{{ $pengurus->jabatan }}</h6>
                                 </div>
                             </div>
                         </div>

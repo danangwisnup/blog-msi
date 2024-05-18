@@ -59,7 +59,7 @@ class StrukturOrganisasiController extends Controller
 
             if ($request->id) {
                 $struktur_organisasi = StrukturOrganisasi::find($request->id);
-                if ($struktur_organisasi && $struktur_organisasi->foto) {
+                if ($struktur_organisasi) {
                     $lokasi_foto = public_path('img/struktur-organisasi/' . $struktur_organisasi->foto);
                     if (file_exists($lokasi_foto)) {
                         unlink($lokasi_foto);
@@ -144,6 +144,12 @@ class StrukturOrganisasiController extends Controller
                 ])
             ]);
 
+            // unlink foto
+            $lokasi_foto = public_path('img/struktur-organisasi/' . $strukturOrganisasi->foto);
+            if (file_exists($lokasi_foto)) {
+                unlink($lokasi_foto);
+            }
+
             // hapus data
             $strukturOrganisasi->delete();
             return response()->json([
@@ -175,6 +181,12 @@ class StrukturOrganisasiController extends Controller
                         'sesudah' => null
                     ])
                 ]);
+
+                // unlink foto
+                $lokasi_foto = public_path('img/struktur-organisasi/' . $strukturOrganisasi->foto);
+                if (file_exists($lokasi_foto)) {
+                    unlink($lokasi_foto);
+                }
             }
 
             // hapus semua data

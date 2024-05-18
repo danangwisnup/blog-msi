@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BeritaArtikel;
 use App\Models\Foto;
 use App\Models\RiwayatAktivitas;
 use Illuminate\Http\Request;
@@ -131,6 +132,9 @@ class FotoController extends Controller
                 'message' => 'Tidak ada data yang dihapus!'
             ]);
         } else {
+            // ubah foto default pada tabel beritaArtikel jika foto yang dihapus digunakan
+            BeritaArtikel::where('foto', $foto->foto)->update(['foto' => 'default.jpg']);
+
             // jika ada foto maka unlink foto
             if (file_exists(public_path('img/' . $foto->foto))) {
                 unlink(public_path('img/' . $foto->foto));
@@ -169,6 +173,9 @@ class FotoController extends Controller
             ]);
         } else {
             foreach (Foto::all() as $foto) {
+                // ubah foto default pada tabel beritaArtikel jika foto yang dihapus digunakan
+                BeritaArtikel::where('foto', $foto->foto)->update(['foto' => 'default.jpg']);
+
                 // unlink semua foto
                 if (file_exists(public_path('img/' . $foto->foto))) {
                     unlink(public_path('img/' . $foto->foto));

@@ -23,7 +23,7 @@
                 <div class="row">
                     <div class="col-lg-8 entries">
 
-                        @if ($ct_beritaArtikel->isEmpty() || is_null($beritaArtikel))
+                        @if ($ct_beritaArtikel->isEmpty() || is_null($beritaArtikel) || (isset($search) && $search == false))
                             <article class="entry entry-single bg-white">
                                 <h2 class="entry-title">
                                     <a href="javascript:void(0)">Berita atau artikel tidak ditemukan!</a>
