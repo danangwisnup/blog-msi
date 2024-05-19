@@ -70,3 +70,7 @@
 
      </div>
  </header><!-- End Header -->
+
+ @if (!request()->is('/'))
+     <br><br>
+ @endif

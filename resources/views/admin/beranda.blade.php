@@ -68,27 +68,29 @@
                                         </select>
                                     </div>
 
-                                    <table class="table table-hover table-bordered align-middle text-center"
-                                        id="zero_config">
-                                        <thead>
-                                            <tr>
-                                                <th width="20%">Waktu</th>
-                                                <th>Pengguna</th>
-                                                <th>Modul</th>
-                                                <th>Aktivitas</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody style="cursor: pointer;">
-                                            @foreach ($ct_riwayatAktivitas as $item)
-                                                <tr onclick="riwayatAktivitas({{ $item->id }})">
-                                                    <td>{{ $item->created_at }}</td>
-                                                    <td>{{ $item->user->name }}</td>
-                                                    <td>{{ $item->modul }}</td>
-                                                    <td>{{ $item->aktivitas }}</td>
+                                    <div class="row table-responsive">
+                                        <table class="table table-hover table-bordered align-middle text-center"
+                                            id="zero_config">
+                                            <thead>
+                                                <tr>
+                                                    <th>Waktu</th>
+                                                    <th>Pengguna</th>
+                                                    <th>Modul</th>
+                                                    <th>Aktivitas</th>
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody style="cursor: pointer;">
+                                                @foreach ($ct_riwayatAktivitas as $item)
+                                                    <tr onclick="riwayatAktivitas({{ $item->id }})">
+                                                        <td>{{ $item->created_at }}</td>
+                                                        <td>{{ $item->user->name }}</td>
+                                                        <td>{{ $item->modul }}</td>
+                                                        <td>{{ $item->aktivitas }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div><!-- End Reports -->

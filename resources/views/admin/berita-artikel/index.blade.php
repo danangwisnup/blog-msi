@@ -36,36 +36,38 @@
                                     <option value="100">100</option>
                                 </select>
                             </div>
-                            <table class="table border table-striped table-bordered align-middle text-center"
-                                id="zero_config">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Tagar</th>
-                                        <th>Judul</th>
-                                        <th width="15%">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($ct_beritaArtikel as $item)
+                            <div class="row table-responsive">
+                                <table class="table border table-striped table-bordered align-middle text-center"
+                                    id="zero_config">
+                                    <thead>
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->tagar }}</td>
-                                            <td>{{ $item->judul }}</td>
-                                            <td class="text-center">
-                                                <a href="{{ route('berita-artikel.show', $item->id) }}"
-                                                    class="btn btn-primary">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                </a>
-                                                <a href="javascript:void(0)" class="btn btn-danger"
-                                                    onclick="confirmDelete({{ $item->id }})">
-                                                    <i class="bi bi-trash3"></i>
-                                                </a>
-                                            </td>
+                                            <th>No</th>
+                                            <th>Tagar</th>
+                                            <th>Judul</th>
+                                            <th width="15%">Aksi</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($ct_beritaArtikel as $item)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $item->tagar }}</td>
+                                                <td>{{ $item->judul }}</td>
+                                                <td class="text-center">
+                                                    <a href="{{ route('berita-artikel.show', $item->id) }}"
+                                                        class="btn btn-primary">
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </a>
+                                                    <a href="javascript:void(0)" class="btn btn-danger"
+                                                        onclick="confirmDelete({{ $item->id }})">
+                                                        <i class="bi bi-trash3"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
