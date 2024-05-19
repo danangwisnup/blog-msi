@@ -3,12 +3,33 @@
     @include('layouts/blog/header')
     <center id="beranda">
         <section id="hero" style="align-items: center; justify-content: center;">
-            <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div id="heroCarousel" data-bs-interval="5000" class="mt-3 carousel slide carousel-fade" data-bs-ride="carousel">
+                <style>
+                    .carousel-item {
+                        position: relative;
+                        height: 100%;
+                        overflow: hidden;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
 
+                    .carousel-item img {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        width: 100%;
+                        height: auto;
+                        transform: translate(-50%, -50%);
+                        min-height: 100%;
+                        min-width: 100%;
+                    }
+                </style>
                 <div class="carousel-inner" role="listbox">
 
                     <!-- Slide 1 -->
-                    <div class="carousel-item active" style="background-image: url(img/{{ $ct_profil->foto_sampul }});">
+                    <div class="carousel-item active mt-5">
+                        <img src="img/{{ $ct_profil->foto_sampul }}" alt="Foto Sampul">
                         <div class="carousel-container">
                             <div class="carousel-content animate__animated animate__fadeInUp">
                                 <h2 class="text-center text-uppercase">Selamat Datang di Website Resmi</h2>

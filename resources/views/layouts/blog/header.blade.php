@@ -1,10 +1,10 @@
  <header id="header" class="fixed-top">
      <div class="container d-flex align-items-center">
 
-         <h1 class="logo me-auto">
-             <a href="{{ url('/') }}">
+         <h1 class="me-auto">
+             <a href="{{ url('/') }}" class="d-flex align-items-center justify-content-center">
                  <img src="{{ url('img') }}/{{ $ct_profil->logo }}" alt="Logo" class="img-fluid"
-                     style="width: 180px; height: 50px;">
+                     style="width: 200px; height: 80px;">
              </a>
          </h1>
 

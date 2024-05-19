@@ -1,9 +1,9 @@
-<header id="header" class="header fixed-top d-flex align-items-center">
+<header id="header" class="header fixed-top d-flex align-items-center" style="height: 80px;">
 
-    <div class="text-center" style="width: 280px; height: 50px; overflow: hidden;">
+    <div class="text-center" style="width: 280px; height: 70px; overflow: hidden;">
         <a href="{{ url('/') }}" class="d-flex align-items-center justify-content-center">
             <img src="{{ url('img') }}/{{ $ct_profil->logo }}" alt="Logo" class="img-fluid"
-                style="width: 180px; height: 50px;">
+                style="width: 190px; height: 70px;">
         </a>
     </div>
 

@@ -1,5 +1,5 @@
 <aside id="sidebar" class="sidebar">
-    <ul class="sidebar-nav" id="sidebar-nav">
+    <ul class="sidebar-nav mt-3" id="sidebar-nav">
         <li class="nav-item">
             <a class="nav-link <?= request()->is('admin') ? '' : 'collapsed' ?>" href="<?= url('admin') ?>">
                 <i class="bi bi-house fs-5 fw-bold"></i>

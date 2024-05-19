@@ -26,8 +26,8 @@ return new class extends Migration
 
         DB::table('profils')->insert([
             'logo' => 'msi.png',
-            'foto_sampul' => 'sampul.jpg',
-            'foto_tentang' => 'tentang.jpg',
+            'foto_sampul' => 'sampul.png',
+            'foto_tentang' => 'tentang.png',
             'nama_blog' => 'Mentari Sehat Indonesia Kab. Kudus',
             'judul_header' => 'Mentari Sehat Indonesia',
             'judul_subheader' => 'Kab. Kudus',

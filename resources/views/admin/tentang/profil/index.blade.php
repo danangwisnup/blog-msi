@@ -42,13 +42,55 @@
                                         accept="image/*">
                                 </div>
 
+                                <style>
+                                    .image-wrapper {
+                                        position: relative;
+                                        width: 100%;
+                                        /* Lebar kontainer sesuai keinginan */
+                                        height: 265px;
+                                        /* Tinggi kontainer sesuai keinginan */
+                                        overflow: hidden;
+                                        /* Memastikan bagian luar gambar dipotong */
+                                        margin: 0 auto;
+                                        /* Untuk memusatkan kontainer */
+                                    }
+
+                                    .image-wrapper img {
+                                        position: absolute;
+                                        top: 50%;
+                                        left: 50%;
+                                        width: auto;
+                                        height: auto;
+                                        transform: translate(-50%, -50%);
+                                        min-height: 100%;
+                                        min-width: 100%;
+                                        object-fit: cover;
+                                    }
+
+                                    /* Media Query untuk perangkat mobile */
+                                    @media (max-width: 767px) {
+                                        .image-wrapper {
+                                            height: 200px;
+                                            /* Tinggi kontainer untuk perangkat mobile */
+                                        }
+                                    }
+
+                                    /* Media Query untuk perangkat sangat kecil (seperti ponsel kecil) */
+                                    @media (max-width: 480px) {
+                                        .image-wrapper {
+                                            height: 150px;
+                                            /* Tinggi kontainer untuk perangkat sangat kecil */
+                                        }
+                                    }
+                                </style>
+
                                 <div class="col-12">
                                     <label for="foto_sampul" class="form-label fw-semibold mt-2">Foto Sampul<small
                                             class="text-danger">*</small></label>
                                     <div id="foto_sampul_preview" class="mb-3 text-center">
-                                        <div class="mb-3 text-center">
+                                        <div class="image-wrapper">
                                             <img src="{{ url('img') }}/{{ $ct_profil->foto_sampul }}"
-                                                class="img-fluid img-thumbnail" style="max-width: 200px" alt="Foto Main">
+                                                class="img-fluid img-thumbnail" alt="Foto Main">
                                         </div>
                                     </div>
                                     <input type="file" class="form-control" id="foto_sampul" name="foto_sampul"
@@ -67,8 +109,6 @@
                                     <input type="file" class="form-control" id="foto_tentang" name="foto_tentang"
                                         accept="image/*">
                                 </div>
-
-
 
                                 <div class="col-12">
                                     <label for="blog" class="form-label fw-semibold mt-2">Nama Blog<small
@@ -147,14 +187,14 @@
                 });
                 this.value = '';
                 $('#foto_sampul_preview').html(
-                    '<div class="mb-3 text-center"><img src="{{ url('img') }}/{{ $ct_profil->foto_sampul }}" class="img-fluid img-thumbnail" style="max-width: 200px" alt="Foto Main"></div>'
+                    '<div class="image-wrapper"><img src="{{ url('img') }}/{{ $ct_profil->foto_sampul }}" class="img-fluid img-thumbnail" alt="Foto Main"></div>'
                 );
             }
 
             let reader = new FileReader();
             reader.onload = (e) => {
                 $('#foto_sampul_preview').html(
-                    `<img src="${e.target.result}" class="img-fluid img-thumbnail" style="max-width: 200px" alt="Foto Main">` +
+                    `<div class="image-wrapper"><img src="${e.target.result}" class="img-fluid img-thumbnail" alt="Foto Main"></div>` +
                     `<button type="button" class="btn btn-danger ms-2" id="hapus_foto_sampul">Hapus Foto</button>`
                 );
             }
@@ -196,7 +236,7 @@
         $(document).on('click', '#hapus_foto_sampul', function() {
             $('#foto_sampul').val('');
             $('#foto_sampul_preview').html(
-                '<div class="mb-3 text-center"><img src="{{ url('img') }}/{{ $ct_profil->foto_sampul }}" class="img-fluid img-thumbnail" style="max-width: 200px" alt="Foto Main"></div>'
+                '<div class="image-wrapper"><img src="{{ url('img') }}/{{ $ct_profil->foto_sampul }}" class="img-fluid img-thumbnail" alt="Foto Main"></div>'
             );
         });
 
