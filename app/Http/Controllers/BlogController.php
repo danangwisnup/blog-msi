@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kontak;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -118,5 +119,79 @@ class BlogController extends Controller
         return view('blog.kontak', [
             'title' => 'Kontak'
         ]);
+    }
+
+    public function sendEmail(Request $request)
+    {
+        $name = $request->input('nama');
+        $email = $request->input('email');
+        $subject = $request->input('subject');
+        $message = $request->input('pesan');
+
+        $receiving_email_address = Kontak::first()->email;
+
+        $headers = "From: $name <$email>\r\n";
+        $headers .= "Reply-To: $email\r\n";
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8\r\n";
+
+        $email_body = "
+            <html>
+            <head>
+                <title>Pesan Baru dari Form Kontak</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        line-height: 1.6;
+                        background-color: #f4f4f4;
+                        padding: 20px;
+                    }
+                    .container {
+                        max-width: 600px;
+                        margin: auto;
+                        background: #ffffff;
+                        padding: 20px;
+                        border-radius: 8px;
+                        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                    }
+                    h2 {
+                        color: #333333;
+                        border-bottom: 1px solid #cccccc;
+                        padding-bottom: 10px;
+                    }
+                    p {
+                        margin: 10px 0;
+                    }
+                    .footer {
+                        margin-top: 20px;
+                        text-align: center;
+                        color: #666666;
+                        font-size: 14px;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class='container'>
+                    <h2>New Message from Contact Form</h2>
+                    <p><strong>Name:</strong> $name</p>
+                    <p><strong>Email:</strong> $email</p>
+                    <p><strong>Subject:</strong> $subject</p>
+                    <p><strong>Message:</strong></p>
+                    <p>$message</p>
+                </div>
+                <div class='footer'>
+                    <p>Pesan ini dikirim melalui formulir kontak di situs web Anda.</p>
+                </div>
+            </body>
+            </html>
+        ";
+
+        $mail_sent = mail($receiving_email_address, $subject, $email_body, $headers);
+
+        if ($mail_sent) {
+            echo "Pesan berhasil dikirim.";
+        } else {
+            echo "Pesan gagal dikirim.";
+        }
     }
 }

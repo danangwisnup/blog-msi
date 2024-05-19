@@ -23,7 +23,7 @@ return new class extends Migration
         });
 
         DB::table('kontaks')->insert([
-            'email' => 'ssrmsi.kabkudus@gmail.com',
+            'email' => 'danangwisnu9502@gmail.com',
             'ig' => 'msi_kab.kudus',
             'wa' => '089514772615',
             'alamat_kantor' => 'Mlati Norowito Gang 8 No. 52 RT 03/ RW 07 Kec. Kota Kudus',

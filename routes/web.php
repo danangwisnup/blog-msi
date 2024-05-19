@@ -58,6 +58,9 @@ Route::get('/berita-artikel/{id}', [BlogController::class, 'beritaArtikel'])->na
 Route::get('/kontak', [BlogController::class, 'kontak']);
 
 
+// Route Email
+Route::post('/kontak', [BlogController::class, 'sendEmail'])->name('kontak.send');
+
 /* -------------------------------------------------------------------------------------------- */
 
 

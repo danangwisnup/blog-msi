@@ -60,8 +60,8 @@
 
                 <div class="row mt-5 justify-content-center" data-aos="fade-up">
                     <div class="col-lg-10">
-                        <form action="assets/admin/forms/contact.php" method="post" role="form"
-                            class="php-email-form">
+                        <form action="{{ route('kontak.send') }}" method="post" role="form" class="php-email-form">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <input type="text" name="nama" class="form-control" id="nama"
