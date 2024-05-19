@@ -186,12 +186,14 @@ class BlogController extends Controller
             </html>
         ";
 
-        $mail_sent = mail($receiving_email_address, $subject, $email_body, $headers);
+        //$mail_sent = mail($receiving_email_address, $subject, $email_body, $headers);
 
-        if ($mail_sent) {
-            echo "Pesan berhasil dikirim.";
-        } else {
-            echo "Pesan gagal dikirim.";
-        }
+        // if ($mail_sent) {
+        //     return "Pesan berhasil dikirim.";
+        // } else {
+        //     return "Pesan gagal dikirim.";
+        // }
+
+        return "Layanan kontak (E-mail) sedang dinonaktifkan.";
     }
 }

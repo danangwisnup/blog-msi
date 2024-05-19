@@ -54,13 +54,13 @@ class StrukturOrganisasiController extends Controller
         if ($request->hasFile('foto')) {
             $foto = $request->file('foto');
             $nama_foto = time() . '.' . $foto->getClientOriginalExtension();
-            $lokasi = public_path('img/struktur-organisasi');
+            $lokasi = 'img/struktur-organisasi';
             $foto->move($lokasi, $nama_foto);
 
             if ($request->id) {
                 $struktur_organisasi = StrukturOrganisasi::find($request->id);
                 if ($struktur_organisasi) {
-                    $lokasi_foto = public_path('img/struktur-organisasi/' . $struktur_organisasi->foto);
+                    $lokasi_foto = 'img/struktur-organisasi/' . $struktur_organisasi->foto;
                     if (file_exists($lokasi_foto)) {
                         unlink($lokasi_foto);
                     }
@@ -145,7 +145,7 @@ class StrukturOrganisasiController extends Controller
             ]);
 
             // unlink foto
-            $lokasi_foto = public_path('img/struktur-organisasi/' . $strukturOrganisasi->foto);
+            $lokasi_foto = 'img/struktur-organisasi/' . $strukturOrganisasi->foto;
             if (file_exists($lokasi_foto)) {
                 unlink($lokasi_foto);
             }
@@ -183,7 +183,7 @@ class StrukturOrganisasiController extends Controller
                 ]);
 
                 // unlink foto
-                $lokasi_foto = public_path('img/struktur-organisasi/' . $strukturOrganisasi->foto);
+                $lokasi_foto = 'img/struktur-organisasi/' . $strukturOrganisasi->foto;
                 if (file_exists($lokasi_foto)) {
                     unlink($lokasi_foto);
                 }

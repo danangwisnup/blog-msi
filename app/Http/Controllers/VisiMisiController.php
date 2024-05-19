@@ -57,11 +57,11 @@ class VisiMisiController extends Controller
         if ($request->hasFile('visi_gambar')) {
             $file = $request->file('visi_gambar');
             $nama_gambar_visi = 'visi_' . time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('img'), $nama_gambar_visi);
+            $file->move('img/', $nama_gambar_visi);
 
             // hapus gambar visi lama
             if (VisiMisi::first()->visi_gambar != 'null') {
-                $file_path = public_path('img') . '/' . VisiMisi::first()->visi_gambar;
+                $file_path = 'img/' . VisiMisi::first()->visi_gambar;
                 if (file_exists($file_path)) {
                     unlink($file_path);
                 }
@@ -74,11 +74,11 @@ class VisiMisiController extends Controller
         if ($request->hasFile('misi_gambar')) {
             $file = $request->file('misi_gambar');
             $nama_gambar_misi = 'misi_' . time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('img'), $nama_gambar_misi);
+            $file->move('img/', $nama_gambar_misi);
 
             // hapus gambar misi lama
             if (VisiMisi::first()->misi_gambar != 'null') {
-                $file_path = public_path('img') . '/' . VisiMisi::first()->misi_gambar;
+                $file_path = 'img/' . VisiMisi::first()->misi_gambar;
                 if (file_exists($file_path)) {
                     unlink($file_path);
                 }

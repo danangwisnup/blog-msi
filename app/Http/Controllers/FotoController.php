@@ -55,14 +55,14 @@ class FotoController extends Controller
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
             $nama_foto = 'foto_' . time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('img/'), $nama_foto);
+            $file->move('img/', $nama_foto);
         }
 
         // unlink foto lama
         if (isset($request->id)) {
             $fotoLama = Foto::find($request->id)->foto;
-            if (file_exists(public_path('img/' . $fotoLama))) {
-                unlink(public_path('img/' . $fotoLama));
+            if (file_exists('img/' . $fotoLama)) {
+                unlink('img/' . $fotoLama);
             }
         }
 
@@ -136,8 +136,8 @@ class FotoController extends Controller
             BeritaArtikel::where('foto', $foto->foto)->update(['foto' => 'default.jpg']);
 
             // jika ada foto maka unlink foto
-            if (file_exists(public_path('img/' . $foto->foto))) {
-                unlink(public_path('img/' . $foto->foto));
+            if (file_exists('img/' . $foto->foto)) {
+                unlink('img/' . $foto->foto);
             }
 
             // simpan riwayat aktivitas
@@ -177,8 +177,8 @@ class FotoController extends Controller
                 BeritaArtikel::where('foto', $foto->foto)->update(['foto' => 'default.jpg']);
 
                 // unlink semua foto
-                if (file_exists(public_path('img/' . $foto->foto))) {
-                    unlink(public_path('img/' . $foto->foto));
+                if (file_exists('img/' . $foto->foto)) {
+                    unlink('img/' . $foto->foto);
                 }
 
                 // simpan riwayat aktivitas

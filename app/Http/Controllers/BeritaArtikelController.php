@@ -64,7 +64,7 @@ class BeritaArtikelController extends Controller
                 // simpan foto dengan nama acak
                 $file = $request->file('foto_upload');
                 $nama_foto = 'foto_' . time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('img/'), $nama_foto);
+                $file->move('img/', $nama_foto);
 
                 // insert ke foto database
                 Foto::create([

@@ -14,15 +14,30 @@
                         justify-content: center;
                     }
 
-                    .carousel-item img {
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        width: 100%;
-                        height: auto;
-                        transform: translate(-50%, -50%);
-                        min-height: 100%;
-                        min-width: 100%;
+                    @media (min-width: 1024px) {
+                        .carousel-item img {
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            width: 100%;
+                            height: auto;
+                            transform: translate(-50%, -50%);
+                            min-height: 100%;
+                            min-width: 100%;
+                        }
+                    }
+
+                    @media (max-width: 1000px) {
+                        .carousel-item img {
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            width: 100%;
+                            height: 80%;
+                            transform: translate(-50%, -50%);
+                            min-height: 100%;
+                            min-width: 100%;
+                        }
                     }
                 </style>
                 <div class="carousel-inner" role="listbox">

@@ -64,11 +64,11 @@ class ProfilController extends Controller
         if ($request->hasFile('logo')) {
             $file = $request->file('logo');
             $nama_logo = 'logo_' . time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('img'), $nama_logo);
+            $file->move('img/', $nama_logo);
 
             // hapus logo lama
             if (Profil::first()->logo != 'null') {
-                $file_path = public_path('img') . '/' . Profil::first()->logo;
+                $file_path = 'img/' . Profil::first()->logo;
                 if (file_exists($file_path)) {
                     unlink($file_path);
                 }
@@ -81,11 +81,11 @@ class ProfilController extends Controller
         if ($request->hasFile('foto_sampul')) {
             $file = $request->file('foto_sampul');
             $nama_foto_sampul = 'foto_sampul_' . time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('img'), $nama_foto_sampul);
+            $file->move('img/', $nama_foto_sampul);
 
             // hapus foto sampul lama jika ada di direktori
             if (Profil::first()->foto_sampul != 'null') {
-                $file_path = public_path('img') . '/' . Profil::first()->foto_sampul;
+                $file_path = 'img/' . Profil::first()->foto_sampul;
                 if (file_exists($file_path)) {
                     unlink($file_path);
                 }
@@ -98,11 +98,11 @@ class ProfilController extends Controller
         if ($request->hasFile('foto_tentang')) {
             $file = $request->file('foto_tentang');
             $nama_foto_tentang = 'foto_tentang_' . time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('img'), $nama_foto_tentang);
+            $file->move('img/', $nama_foto_tentang);
 
             // hapus foto tentang lama jika ada di direktori
             if (Profil::first()->foto_tentang != 'null') {
-                $file_path = public_path('img') . '/' . Profil::first()->foto_tentang;
+                $file_path = 'img/' . Profil::first()->foto_tentang;
                 if (file_exists($file_path)) {
                     unlink($file_path);
                 }
