@@ -90,7 +90,7 @@ class VideoController extends Controller
         // simpan riwayat aktivitas
         RiwayatAktivitas::create([
             'user_id' => auth()->id(),
-            'modul' => 'Foto',
+            'modul' => 'Video',
             'aktivitas' => 'Menyimpan video ' . $data['nama'],
             'data' => json_encode([
                 'sebelum' => $request->id ? Video::find($request->id)->toArray() : null,
