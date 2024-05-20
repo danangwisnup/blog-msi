@@ -65,12 +65,16 @@
          </nav><!-- .navbar -->
 
          <div class="d-flex ms-5">
-             <a href="{{ url('admin/auth/login') }}" class="btn btn-success">Login</a>
+             @if (auth()->check())
+                 <a href="{{ url('admin') }}" class="btn btn-success">Dashboard</a>
+             @else
+                 <a href="{{ url('admin/auth/login') }}" class="btn btn-success">Login</a>
+             @endif
          </div>
 
      </div>
  </header><!-- End Header -->
 
  @if (!request()->is('/'))
-     <br><br>
+     <br><br><br>
  @endif

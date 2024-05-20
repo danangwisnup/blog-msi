@@ -42,48 +42,6 @@
                                         accept="image/*">
                                 </div>
 
-                                <style>
-                                    .image-wrapper {
-                                        position: relative;
-                                        width: 100%;
-                                        /* Lebar kontainer sesuai keinginan */
-                                        height: 265px;
-                                        /* Tinggi kontainer sesuai keinginan */
-                                        overflow: hidden;
-                                        /* Memastikan bagian luar gambar dipotong */
-                                        margin: 0 auto;
-                                        /* Untuk memusatkan kontainer */
-                                    }
-
-                                    .image-wrapper img {
-                                        position: absolute;
-                                        top: 50%;
-                                        left: 50%;
-                                        width: auto;
-                                        height: auto;
-                                        transform: translate(-50%, -50%);
-                                        min-height: 100%;
-                                        min-width: 100%;
-                                        object-fit: cover;
-                                    }
-
-                                    /* Media Query untuk perangkat mobile */
-                                    @media (max-width: 767px) {
-                                        .image-wrapper {
-                                            height: 200px;
-                                            /* Tinggi kontainer untuk perangkat mobile */
-                                        }
-                                    }
-
-                                    /* Media Query untuk perangkat sangat kecil (seperti ponsel kecil) */
-                                    @media (max-width: 480px) {
-                                        .image-wrapper {
-                                            height: 150px;
-                                            /* Tinggi kontainer untuk perangkat sangat kecil */
-                                        }
-                                    }
-                                </style>
-
                                 <div class="col-12">
                                     <label for="foto_sampul" class="form-label fw-semibold mt-2">Foto Sampul<small
                                             class="text-danger">*</small></label>

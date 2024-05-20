@@ -29,21 +29,13 @@
 
                 <div class="row skills-content">
 
-                    <div> <strong>Visi</strong> </div>
-                    <div class="col-lg-3">
-                        <img src="{{ url('img/visi-misi') }}/{{ $ct_visiMisi->visi_gambar }}" class="img-fluid"
-                            alt="">
-                    </div>
-                    <div class="col-lg-9">
+                    <div class="col-lg-6 mb-5" data-aos="fade-up">
+                        <strong>Visi</strong> <br>
                         {!! $ct_visiMisi->visi_deskripsi !!}
                     </div>
 
-                    <div> <strong>Misi</strong> </div>
-                    <div class="col-lg-3">
-                        <img src="{{ url('img/visi-misi') }}/{{ $ct_visiMisi->misi_gambar }}" class="img-fluid"
-                            alt="">
-                    </div>
-                    <div class="col-lg-9">
+                    <div class="col-lg-6 mb-5" data-aos="fade-up">
+                        <strong>Misi</strong> <br>
                         {!! $ct_visiMisi->misi_deskripsi !!}
                     </div>
 

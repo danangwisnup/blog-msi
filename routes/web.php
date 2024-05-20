@@ -12,6 +12,7 @@ use App\Http\Controllers\VisiMisiController;
 use App\Http\Controllers\ProgramKerjaController;
 use App\Http\Controllers\BeritaArtikelController;
 use App\Http\Controllers\PengaturanAkunController;
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\StrukturOrganisasiController;
 
 /*
@@ -102,6 +103,10 @@ Route::group(['prefix' => 'admin'], function () {
 
         // Route admin
         Route::get('/', [BerandaController::class, 'admin'])->name('admin');
+
+        // Route Slider
+        Route::delete('slider/destroy-all', [SliderController::class, 'destroyAll'])->name('slider.destroy-all');
+        Route::resource('slider', SliderController::class);
 
         /* -------------------------------------------------------------------------------------------- */
         /* prefix tentang/*                                                                             */

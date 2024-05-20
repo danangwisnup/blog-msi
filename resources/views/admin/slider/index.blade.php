@@ -6,25 +6,24 @@
     <main id="main" class="main">
 
         <div class="pagetitle mt-4 mb-4">
-            <h1>Struktur Organisasi</h1>
+            <h1>{{ $title }}</h1>
         </div>
 
         <section class="section">
             <div class="row">
                 <div class="col-12">
                     <div class="text-end">
-                        <!-- open sweetalert -->
                         <a href="javascript:void(0)" class="btn btn-danger" onclick="confirmDeleteAll()">
                             <i class="bi bi-trash3"></i> Hapus Semua
                         </a>
-                        <a href="<?= url('admin/tentang/struktur-organisasi/create') ?>" class="btn btn-success">
+                        <a href="<?= url('admin/slider/create') ?>" class="btn btn-success">
                             <i class="bi bi-plus-square-dotted"></i> Tambah baru
                         </a>
                     </div>
                     <br />
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Daftar Staff Pengurus</h5>
+                            <h5 class="card-title">Daftar {{ $title }}</h5>
                             <div class="mb-3">
                                 <input type="text" class="form-control" id="search-table" placeholder="Cari data...">
                             </div>
@@ -43,32 +42,31 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
+                                            <th>Judul</th>
+                                            <th>Deksripsi</th>
                                             <th>Foto</th>
-                                            <th>Nama</th>
-                                            <th>Jabatan</th>
                                             <th>Urutan</th>
                                             <th width="15%">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($ct_strukturOrganisasi as $item)
+                                        @foreach ($ct_slider as $item)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>
-                                                    <img src="{{ asset('img/struktur-organisasi/' . $item->foto) }}"
-                                                        alt="{{ $item->nama }}" class="img-thumbnail" width="100">
+                                                <td>{{ $item->judul }}</td>
+                                                <td>{{ $item->deskripsi }}</td>
+                                                <td><img src="{{ url('img/slider') }}/{{ $item->foto }}"
+                                                        class="img-fluid img-thumbnail" style="max-width: 200px"
+                                                        alt="Foto">
                                                 </td>
-                                                <td>{{ $item->nama }}</td>
-                                                <td>{{ $item->jabatan }}</td>
                                                 <td>{{ $item->urutan }}</td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('struktur-organisasi.show', $item->id) }}"
-                                                        class="btn btn-primary">
+                                                    <a href="{{ route('slider.show', $item->id) }}" class="btn btn-primary">
                                                         <i class="bi bi-pencil-square"></i>
                                                     </a>
                                                     <a href="javascript:void(0)" class="btn btn-danger"
                                                         onclick="confirmDelete({{ $item->id }})">
-                                                        <i class="bi bi-trash"></i>
+                                                        <i class="bi bi-trash3"></i>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -101,13 +99,12 @@
                 confirmButtonColor: '#d33'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    fetch('<?= url('admin/tentang/struktur-organisasi') ?>/' + id, {
+                    fetch('<?= url('admin/slider') ?>/' + id, {
                         method: 'DELETE',
                         headers: {
                             'X-CSRF-TOKEN': '<?= csrf_token() ?>'
                         }
                     }).then(response => response.json()).then(data => {
-                        console.log(data);
                         if (data.status == 'success') {
                             Swal.fire({
                                 icon: 'success',
@@ -149,13 +146,12 @@
                 confirmButtonColor: '#d33'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    fetch('<?= url('admin/tentang/struktur-organisasi/destroy-all') ?>', {
+                    fetch('<?= url('admin/slider/destroy-all') ?>', {
                         method: 'DELETE',
                         headers: {
                             'X-CSRF-TOKEN': '<?= csrf_token() ?>'
                         }
                     }).then(response => response.json()).then(data => {
-                        console.log(data);
                         if (data.status == 'success') {
                             Swal.fire({
                                 icon: 'success',

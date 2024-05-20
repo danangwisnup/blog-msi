@@ -36,10 +36,13 @@ class StrukturOrganisasiController extends Controller
     {
         try {
             $request->validate([
+                'urutan' => 'required|integer',
                 'foto' => 'required_if:id,null|image|mimes:jpeg,png,jpg,gif,svg|max:5048',
                 'nama' => 'required',
                 'jabatan' => 'required'
             ], [
+                'urutan.required' => 'Urutan harus diisi.',
+                'urutan.integer' => 'Urutan harus berupa angka.',
                 'foto.required_if' => 'Foto harus diunggah jika ID kosong.',
                 'foto.image' => 'Foto harus berupa gambar.',
                 'foto.mimes' => 'Foto harus berformat jpeg, png, jpg, gif, atau svg.',
@@ -68,8 +71,18 @@ class StrukturOrganisasiController extends Controller
             }
         }
 
+        // cek urutan
+        $cek_urutan = StrukturOrganisasi::where('urutan', $request->urutan)->first();
+        if ($cek_urutan && !$request->id) {
+            return back()->withInput()->with('error', 'Urutan sudah digunakan.');
+        } else if ($cek_urutan) {
+            $old = StrukturOrganisasi::find($request->id);
+            $cek_urutan->where('id', $cek_urutan->id)->update(['urutan' => $old->urutan]);
+        }
+
         // data
         $data = [
+            'urutan' => $request->urutan,
             'nama' => $request->nama,
             'jabatan' => $request->jabatan
         ];

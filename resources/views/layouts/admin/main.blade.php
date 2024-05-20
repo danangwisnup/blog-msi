@@ -52,13 +52,8 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
     <!-- Vendor JS Files -->
-    <script src=" {{ url('assets/admin/assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
     <script src="{{ url('assets/admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ url('assets/admin/assets/vendor/chart.js/chart.umd.js') }}"></script>
-    <script src="{{ url('assets/admin/assets/vendor/echarts/echarts.min.js') }}"></script>
-    <script src="{{ url('assets/admin/assets/vendor/quill/quill.min.js') }}') }}"></script>
     <script src="{{ url('assets/admin/assets/vendor/tinymce/tinymce.min.js') }}"></script>
-    <script src="{{ url('assets/admin/assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ url('assets/admin/assets/vendor/sweetalert/sweetalert2.min.js') }}"></script>
 
     <!-- DataTables -->
@@ -105,6 +100,13 @@
             });
         </script>
     @endif
+
+    <script>
+        // jika melakukan submit maka disable semua tombol submit
+        $('form').submit(function() {
+            $(this).find('button').prop('disabled', true);
+        });
+    </script>
 </body>
 
 </html>

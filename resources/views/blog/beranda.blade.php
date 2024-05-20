@@ -4,56 +4,46 @@
     <center id="beranda">
         <section id="hero" style="align-items: center; justify-content: center;">
             <div id="heroCarousel" data-bs-interval="5000" class="mt-3 carousel slide carousel-fade" data-bs-ride="carousel">
-                <style>
-                    .carousel-item {
-                        position: relative;
-                        height: 100%;
-                        overflow: hidden;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                    }
-
-                    @media (min-width: 1024px) {
-                        .carousel-item img {
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            width: 100%;
-                            height: auto;
-                            transform: translate(-50%, -50%);
-                            min-height: 100%;
-                            min-width: 100%;
-                        }
-                    }
-
-                    @media (max-width: 1000px) {
-                        .carousel-item img {
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            width: 100%;
-                            height: 80%;
-                            transform: translate(-50%, -50%);
-                            min-height: 100%;
-                            min-width: 100%;
-                        }
-                    }
-                </style>
                 <div class="carousel-inner" role="listbox">
 
-                    <!-- Slide 1 -->
-                    <div class="carousel-item active mt-5">
-                        <img src="img/{{ $ct_profil->foto_sampul }}" alt="Foto Sampul">
+                    <!-- Slide Sampul -->
+                    <div class="carousel-item active"
+                        style="background-image: url('img/{{ $ct_profil->foto_sampul }}'); background-position: center; background-size: cover;">
+                        <div
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);">
+                        </div>
                         <div class="carousel-container">
-                            <div class="carousel-content animate__animated animate__fadeInUp">
-                                <h2 class="text-center text-uppercase">Selamat Datang di Website Resmi</h2>
-                                <h3 class="text-center text-uppercase text-success">
-                                    {{ $ct_profil->nama_blog }}
-                                </h3>
+                            <div style="position: relative; z-index: 1; color: white; text-align: center; padding: 20px;">
+                                <div class="text-white animate__animated animate__fadeInUp">
+                                    <h2 class="text-center text-uppercase fw-bold">
+                                        Selamat Datang di Website Resmi
+                                    </h2>
+                                    <h4 class="text-center text-uppercase fw-bold">
+                                        {{ $ct_profil->nama_blog }}
+                                    </h4>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Slide SLider -->
+                    @foreach ($ct_slider as $item)
+                        <div class="carousel-item"
+                            style="background-image: url('img/slider/{{ $item->foto }}'); background-position: center; background-size: cover;">
+                            <div
+                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);">
+                            </div>
+                            <div class="carousel-container">
+                                <div
+                                    style="position: relative; z-index: 1; color: white; text-align: center; padding: 20px;">
+                                    <div class="text-white animate__animated animate__fadeInUp">
+                                        <h2 class="text-center fw-bold">{{ $item->judul }}</h2>
+                                        <p class="text-center fw-bold">{{ $item->deskripsi }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
 
                 </div>
 
@@ -97,6 +87,67 @@
                 </div>
             </div>
         </section><!-- End About Us Section -->
+
+        <!-- ======= Our Skills Section ======= -->
+        <section id="skills" class="skills">
+            <div class="container">
+
+                <div class="section-title" data-aos="fade-up">
+                    <h2>Visi & Misi</h2>
+                </div>
+
+                <div class="row skills-content">
+
+                    <div class="col-lg-6 mb-5" data-aos="fade-up">
+                        <strong>Visi</strong> <br>
+                        {!! $ct_visiMisi->visi_deskripsi !!}
+                    </div>
+
+                    <div class="col-lg-6 mb-5" data-aos="fade-up">
+                        <strong>Misi</strong> <br>
+                        {!! $ct_visiMisi->misi_deskripsi !!}
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End Our Skills Section -->
+
+        <!-- ======= Our Team Section ======= -->
+        <section id="team" class="team section-bg">
+            <div class="container">
+
+                <div class="section-title" data-aos="fade-up">
+                    <h2>Pengurus <strong>Kami</strong></h2>
+                </div>
+
+                <div class="row">
+
+                    @foreach ($ct_strukturOrganisasi as $pengurus)
+                        <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                            <div class="member" data-aos="fade-up">
+                                <div class="member-img">
+                                    <img src="{{ url('img/struktur-organisasi') }}/{{ $pengurus->foto }}" class="img-fluid"
+                                        alt="">
+                                    <div class="social">
+                                        <a href=""><i class="bi bi-twitter"></i></a>
+                                        <a href=""><i class="bi bi-facebook"></i></a>
+                                        <a href=""><i class="bi bi-instagram"></i></a>
+                                        <a href=""><i class="bi bi-linkedin"></i></a>
+                                    </div>
+                                </div>
+                                <div class="member-info">
+                                    <h4>{{ $pengurus->nama }}</h4>
+                                    <h6>{{ $pengurus->jabatan }}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+                </div>
+
+            </div>
+        </section><!-- End Our Team Section -->
 
         <!-- Berita atau Artikel start -->
         <section id="berita-artikel" class="pricing section-bg1">
@@ -142,7 +193,8 @@
                     @foreach ($ct_foto->take(6) as $item)
                         <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                             <img src="{{ asset('img') }}/{{ $item->foto }}"
-                                class="img-fluid portfolio-lightbox preview-link" alt="" style="cursor: pointer;">
+                                class="img-fluid portfolio-lightbox preview-link" alt=""
+                                style="cursor: pointer;">
                             <div class="portfolio-info text-center">
                                 <h4>{{ $item->nama }}</h4>
                             </div>

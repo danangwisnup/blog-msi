@@ -7,6 +7,13 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link <?= request()->is('admin/slider*') ? '' : 'collapsed' ?>"
+                href="<?= url('admin/slider') ?>">
+                <i class="bi bi-sliders fs-5 fw-bold"></i>
+                <span>Slider</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link <?= request()->is('admin/tentang*') ? '' : 'collapsed' ?>" data-bs-target="#tentang-nav"
                 data-bs-toggle="collapse" href="#">
                 <i class="bi bi-info-circle fs-5 fw-bold"></i>
