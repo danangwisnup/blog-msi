@@ -7,7 +7,7 @@
 
         <div class="pagetitle mt-4 mb-4">
             <div class="text-start">
-                <a href="<?= url('admin/tentang/struktur-organisasi') ?>" class="btn btn-dark">
+                <a href="<?= previous_url() ?>" class="btn btn-dark">
                     <i class="bi bi-box-arrow-left"></i> Kembali
                 </a>
             </div>
