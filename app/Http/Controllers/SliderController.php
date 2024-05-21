@@ -80,10 +80,12 @@ class SliderController extends Controller
         // jika ada id update
         if ($request->id) {
             $slider = Slider::find($request->id);
-            if ($slider && $slider->foto != $nama_foto) {
-                $lokasi_foto = 'img/slider/' . $slider->foto;
-                if (file_exists($lokasi_foto)) {
-                    unlink($lokasi_foto);
+            if ($slider) {
+                if ($slider->foto != $nama_foto) {
+                    $lokasi_foto = 'img/slider/' . $slider->foto;
+                    if (file_exists($lokasi_foto)) {
+                        unlink($lokasi_foto);
+                    }
                 }
 
                 $slider->update($data);
